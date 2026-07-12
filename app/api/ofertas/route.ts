@@ -1,27 +1,29 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { createClient } from "@/lib/supabase/server";
+import { getCtx } from "@/lib/api";
 import { parseFiltros, queryOfertas } from "@/lib/ofertas";
 
+const FREE_VISIVEL = 4;
+
 /**
- * Feed paginado (lê do banco). Usado pelo botão "Carregar mais" do /ofertas
- * para buscar as próximas páginas por cursor sem recarregar a tela.
- * Reaproveita a MESMA lógica de query do Server Component (lib/ofertas.ts).
+ * Feed paginado (lê do banco). Usado pelo "Carregar mais" do /ofertas.
+ * Plano Free é capado no servidor (nunca recebe além dos 4 primeiros), então
+ * a gate não pode ser burlada chamando a rota direto.
  */
 export async function GET(request: NextRequest) {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    return NextResponse.json({ error: "Não autenticado." }, { status: 401 });
-  }
+  const ctx = await getCtx();
+  if (ctx instanceof NextResponse) return ctx;
 
   const filtros = parseFiltros(request.nextUrl.searchParams);
 
   try {
-    const resultado = await queryOfertas(supabase, filtros);
+    const resultado = await queryOfertas(ctx.supabase, filtros);
+    if (ctx.plano === "free") {
+      return NextResponse.json({
+        ads: resultado.ads.slice(0, FREE_VISIVEL),
+        nextCursor: null,
+      });
+    }
     return NextResponse.json(resultado);
   } catch {
     return NextResponse.json(

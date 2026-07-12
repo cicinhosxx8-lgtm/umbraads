@@ -62,6 +62,9 @@ async function QuotaBar() {
   );
 }
 
+/** Anúncios visíveis no plano Free antes do bloqueio. */
+const FREE_VISIVEL = 4;
+
 export default async function OfertasPage({
   searchParams,
 }: {
@@ -69,7 +72,24 @@ export default async function OfertasPage({
 }) {
   const supabase = await createClient();
   const filtros = parseFiltros(searchParams);
+
+  // plano do usuário → decide se o feed é gated
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("plano")
+    .eq("id", user!.id)
+    .maybeSingle();
+  const plano = ((profile as { plano: Plano } | null)?.plano ?? "free") as Plano;
+  const isFree = plano === "free";
+
   const { ads, nextCursor } = await queryOfertas(supabase, filtros);
+
+  // Free vê só os primeiros N reais; o resto vira card bloqueado no cliente.
+  const visibleAds = isFree ? ads.slice(0, FREE_VISIVEL) : ads;
+  const cursor = isFree ? null : nextCursor;
 
   // querystring dos filtros (sem cursor) para o "Carregar mais" e para
   // remontar o feed quando os filtros mudam.
@@ -92,9 +112,10 @@ export default async function OfertasPage({
 
       <OfertasFeed
         key={qs}
-        initialAds={ads}
-        initialCursor={nextCursor}
+        initialAds={visibleAds}
+        initialCursor={cursor}
         filtersQS={qs}
+        locked={isFree}
       />
     </main>
   );
