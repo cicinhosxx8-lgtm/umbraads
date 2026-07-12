@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #09090b; color: #d4d4d8; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #d4d4d8; text-decoration: none; }
+  a:hover { color: #f4f4f5; }
+  ::selection { background: rgba(245,158,11,0.3); }
+  @keyframes umbraPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.5); } 50% { box-shadow: 0 0 0 6px rgba(245,158,11,0); } }
+  @keyframes umbraDot { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden; background:#09090b;">
+
+<!-- ============ NAVBAR ============ -->
+<nav style="position:sticky; top:0; z-index:50; backdrop-filter:blur(12px); background:rgba(9,9,11,0.8); border-bottom:1px solid #27272a;">
+  <div style="max-width:1180px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="font-size:20px; font-weight:800; letter-spacing:-0.02em; color:#f4f4f5;">Umbra<span style="color:#f59e0b;">Ads</span></div>
+    <div style="display:flex; align-items:center; gap:32px; font-size:14px; font-weight:500;">
+      <a href="#recursos" style="color:#a1a1aa;">Recursos</a>
+      <a href="#como" style="color:#a1a1aa;">Como funciona</a>
+      <a href="#planos" style="color:#a1a1aa;">Planos</a>
+      <a href="#faq" style="color:#a1a1aa;">FAQ</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="#" style="font-size:14px; font-weight:600; color:#d4d4d8; padding:9px 16px; border-radius:8px;">Entrar</a>
+      <a href="#planos" style="font-size:14px; font-weight:600; color:#09090b; background:#f59e0b; padding:9px 18px; border-radius:8px;" style-hover="background:#fbbf24;">Começar agora</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section style="max-width:1180px; margin:0 auto; padding:80px 32px 64px;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;">
+    <div>
+      <div style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(245,158,11,0.35); background:rgba(245,158,11,0.06); color:#fcd34d; font-size:12.5px; font-weight:600; padding:6px 14px; border-radius:999px; margin-bottom:28px;">
+        <span style="width:6px; height:6px; border-radius:999px; background:#f59e0b; display:inline-block; animation:umbraDot 1.8s infinite;"></span>
+        Biblioteca de anúncios da Meta exposta
+      </div>
+      <h1 style="font-size:54px; line-height:1.05; font-weight:900; letter-spacing:-0.03em; color:#f4f4f5; margin:0 0 22px;">Espione as ofertas que estão <span style="color:#f59e0b;">ESCALANDO</span> no Facebook agora</h1>
+      <p style="font-size:18px; line-height:1.6; color:#a1a1aa; margin:0 0 32px; max-width:520px;">Chega de testar criativo no escuro. Veja o que já está vendendo, modele os vencedores e lance campanhas com dados — não com achismo.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="#planos" style="font-size:15px; font-weight:700; color:#09090b; background:#f59e0b; padding:15px 26px; border-radius:10px;" style-hover="background:#fbbf24;">Quero ver as ofertas</a>
+        <a href="#recursos" style="font-size:15px; font-weight:600; color:#d4d4d8; background:transparent; border:1px solid #3f3f46; padding:15px 26px; border-radius:10px;" style-hover="border-color:#71717a; color:#f4f4f5;">Ver recursos</a>
+      </div>
+      <div style="margin-top:22px; font-size:13px; color:#71717a; font-weight:500;">Garantia de 7 dias &nbsp;•&nbsp; Cancele quando quiser</div>
+    </div>
+
+    <!-- BROWSER MOCKUP -->
+    <div style="border:1px solid #27272a; border-radius:14px; overflow:hidden; background:#18181b; box-shadow:0 30px 80px -20px rgba(0,0,0,0.8);">
+      <div style="display:flex; align-items:center; gap:14px; padding:12px 16px; border-bottom:1px solid #27272a; background:#18181b;">
+        <div style="display:flex; gap:7px;">
+          <span style="width:11px; height:11px; border-radius:999px; background:#3f3f46; display:inline-block;"></span>
+          <span style="width:11px; height:11px; border-radius:999px; background:#3f3f46; display:inline-block;"></span>
+          <span style="width:11px; height:11px; border-radius:999px; background:#3f3f46; display:inline-block;"></span>
+        </div>
+        <div style="flex:1; background:#09090b; border:1px solid #27272a; border-radius:6px; padding:5px 12px; font-size:12px; color:#71717a; text-align:center;">app.umbraads.com.br</div>
+      </div>
+      <div style="padding:18px; background:#09090b;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:700; color:#f4f4f5;">Ofertas Escaladas</div>
+          <div style="font-size:11px; color:#71717a;">Atualizado agora</div>
+        </div>
+        <div style="display:grid; gap:12px;">
+          <div style="border:1px solid #27272a; border-radius:12px; padding:14px; background:#18181b; display:flex; gap:12px; align-items:center;">
+            <div style="width:52px; height:52px; border-radius:8px; background:linear-gradient(135deg,#27272a,#3f3f46); flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:#f4f4f5;"><span style="width:7px;height:7px;border-radius:999px;background:#10b981;display:inline-block;"></span>Emagrece Já — Detox</div>
+              <div style="font-size:11px; color:#71717a; margin-top:3px;">54 dias no ar · 31 variações</div>
+            </div>
+            <div style="text-align:right;"><div style="font-size:22px; font-weight:800; color:#f59e0b; font-variant-numeric:tabular-nums;">91</div><div style="font-size:9px; font-weight:700; color:#f59e0b; letter-spacing:0.06em;">ESCALANDO</div></div>
+          </div>
+          <div style="border:1px solid #27272a; border-radius:12px; padding:14px; background:#18181b; display:flex; gap:12px; align-items:center;">
+            <div style="width:52px; height:52px; border-radius:8px; background:linear-gradient(135deg,#27272a,#3f3f46); flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:#f4f4f5;"><span style="width:7px;height:7px;border-radius:999px;background:#10b981;display:inline-block;"></span>Método Renda Extra</div>
+              <div style="font-size:11px; color:#71717a; margin-top:3px;">38 dias no ar · 22 variações</div>
+            </div>
+            <div style="text-align:right;"><div style="font-size:22px; font-weight:800; color:#f59e0b; font-variant-numeric:tabular-nums;">76</div><div style="font-size:9px; font-weight:700; color:#f59e0b; letter-spacing:0.06em;">ESCALANDO</div></div>
+          </div>
+          <div style="border:1px solid #27272a; border-radius:12px; padding:14px; background:#18181b; display:flex; gap:12px; align-items:center; opacity:0.7;">
+            <div style="width:52px; height:52px; border-radius:8px; background:linear-gradient(135deg,#27272a,#3f3f46); flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:#f4f4f5;"><span style="width:7px;height:7px;border-radius:999px;background:#fbbf24;display:inline-block;"></span>Curso Copy 6 em 7</div>
+              <div style="font-size:11px; color:#71717a; margin-top:3px;">12 dias no ar · 9 variações</div>
+            </div>
+            <div style="text-align:right;"><div style="font-size:22px; font-weight:800; color:#fbbf24; font-variant-numeric:tabular-nums;">58</div><div style="font-size:9px; font-weight:700; color:#a1a1aa; letter-spacing:0.06em;">AQUECENDO</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BARRA DE PROVA ============ -->
+<section style="border-top:1px solid #27272a; border-bottom:1px solid #27272a; background:#0c0c0e;">
+  <div style="max-width:1180px; margin:0 auto; padding:36px 32px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+    <div style="text-align:center;"><div style="font-size:34px; font-weight:800; color:#f59e0b; font-variant-numeric:tabular-nums; letter-spacing:-0.02em;">2.300+</div><div style="font-size:13px; color:#a1a1aa; margin-top:4px;">anúncios rastreados</div></div>
+    <div style="text-align:center;"><div style="font-size:34px; font-weight:800; color:#f59e0b; font-variant-numeric:tabular-nums; letter-spacing:-0.02em;">480+</div><div style="font-size:13px; color:#a1a1aa; margin-top:4px;">ofertas escaladas</div></div>
+    <div style="text-align:center;"><div style="font-size:34px; font-weight:800; color:#f59e0b; letter-spacing:-0.02em;">24/7</div><div style="font-size:13px; color:#a1a1aa; margin-top:4px;">monitoramento</div></div>
+    <div style="text-align:center;"><div style="font-size:34px; font-weight:800; color:#f59e0b; letter-spacing:-0.02em;">100%</div><div style="font-size:13px; color:#a1a1aa; margin-top:4px;">foco no Brasil</div></div>
+  </div>
+</section>
+
+<!-- ============ DOR ============ -->
+<section style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+  <div style="text-align:center; max-width:720px; margin:0 auto 48px;">
+    <h2 style="font-size:38px; font-weight:800; letter-spacing:-0.025em; color:#f4f4f5; margin:0 0 16px; line-height:1.1;">Pare de pagar caro pra descobrir o que <span style="color:#f87171;">não funciona</span>.</h2>
+    <p style="font-size:17px; color:#a1a1aa; line-height:1.6; margin:0;">Enquanto você queima verba testando criativo no chute, tem gente só modelando o que já escala. A diferença não é sorte — é informação.</p>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:900px; margin:0 auto;">
+    <div style="border:1px solid #27272a; border-radius:16px; padding:28px; background:#18181b;">
+      <div style="font-size:13px; font-weight:700; color:#f87171; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px;">Sem UmbraAds</div>
+      <sc-for list="{{ semItems }}" as="item" hint-placeholder-count="4">
+        <div style="display:flex; gap:12px; align-items:flex-start; padding:10px 0; border-top:1px solid #27272a;">
+          <span style="width:20px; height:20px; border-radius:999px; background:rgba(239,68,68,0.12); color:#f87171; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0; margin-top:1px;">✕</span>
+          <span style="font-size:14.5px; color:#a1a1aa; line-height:1.5;">{{ item }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="border:1px solid rgba(245,158,11,0.35); border-radius:16px; padding:28px; background:linear-gradient(180deg,rgba(245,158,11,0.05),#18181b);">
+      <div style="font-size:13px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px;">Com UmbraAds</div>
+      <sc-for list="{{ comItems }}" as="item" hint-placeholder-count="4">
+        <div style="display:flex; gap:12px; align-items:flex-start; padding:10px 0; border-top:1px solid #27272a;">
+          <span style="width:20px; height:20px; border-radius:999px; background:rgba(16,185,129,0.14); color:#34d399; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; flex-shrink:0; margin-top:1px;">✓</span>
+          <span style="font-size:14.5px; color:#d4d4d8; line-height:1.5;">{{ item }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEMONSTRAÇÃO ============ -->
+<section style="border-top:1px solid #27272a; background:#0c0c0e;">
+  <div style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 48px;">
+      <h2 style="font-size:38px; font-weight:800; letter-spacing:-0.025em; color:#f4f4f5; margin:0 0 12px; line-height:1.1;">O feed que os gestores não querem que você veja</h2>
+      <p style="font-size:16px; color:#a1a1aa; margin:0;">Cada card é uma oferta real sendo dissecada em tempo real.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+      <!-- card 1 -->
+      <div style="border:1px solid #27272a; border-radius:16px; overflow:hidden; background:#18181b;">
+        <div style="height:180px; background:linear-gradient(135deg,#1f1f23,#3f3f46); position:relative;">
+          <div style="position:absolute; top:12px; left:12px; display:flex; align-items:center; gap:6px; background:rgba(9,9,11,0.7); backdrop-filter:blur(4px); padding:5px 10px; border-radius:999px; font-size:11px; font-weight:600; color:#34d399;"><span style="width:6px;height:6px;border-radius:999px;background:#10b981;display:inline-block;"></span>Ativo</div>
+          <div style="position:absolute; bottom:12px; right:12px; background:rgba(9,9,11,0.7); backdrop-filter:blur(4px); padding:4px 9px; border-radius:6px; font-size:11px; font-weight:600; color:#d4d4d8;">▶ Vídeo</div>
+        </div>
+        <div style="padding:18px;">
+          <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:12px;">Detox Slim Oficial</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <div><div style="font-size:11px; color:#71717a;">Dias no ar</div><div style="font-size:16px; font-weight:700; color:#f4f4f5; font-variant-numeric:tabular-nums;">42</div></div>
+            <div><div style="font-size:11px; color:#71717a;">Variações</div><div style="font-size:16px; font-weight:700; color:#f4f4f5; font-variant-numeric:tabular-nums;">27</div></div>
+            <div><div style="font-size:11px; color:#71717a;">País</div><div style="font-size:16px; font-weight:700; color:#f4f4f5;">🇧🇷 BR</div></div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid #27272a; padding-top:14px;">
+            <span style="font-size:12px; color:#a1a1aa;">Scale Score</span>
+            <span style="display:inline-flex; align-items:center; gap:8px;"><span style="font-size:22px; font-weight:800; color:#f59e0b; font-variant-numeric:tabular-nums;">84</span><span style="font-size:10px; font-weight:800; color:#09090b; background:#f59e0b; padding:3px 8px; border-radius:6px; letter-spacing:0.04em; animation:umbraPulse 2s infinite;">ESCALANDO</span></span>
+          </div>
+        </div>
+      </div>
+      <!-- card 2 -->
+      <div style="border:1px solid #27272a; border-radius:16px; overflow:hidden; background:#18181b;">
+        <div style="height:180px; background:linear-gradient(135deg,#231f1a,#3f3a2e); position:relative;">
+          <div style="position:absolute; top:12px; left:12px; display:flex; align-items:center; gap:6px; background:rgba(9,9,11,0.7); backdrop-filter:blur(4px); padding:5px 10px; border-radius:999px; font-size:11px; font-weight:600; color:#34d399;"><span style="width:6px;height:6px;border-radius:999px;background:#10b981;display:inline-block;"></span>Ativo</div>
+          <div style="position:absolute; bottom:12px; right:12px; background:rgba(9,9,11,0.7); backdrop-filter:blur(4px); padding:4px 9px; border-radius:6px; font-size:11px; font-weight:600; color:#d4d4d8;">🖼 Imagem</div>
+        </div>
+        <div style="padding:18px;">
+          <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:12px;">Renda na Web BR</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <div><div style="font-size:11px; color:#71717a;">Dias no ar</div><div style="font-size:16px; font-weight:700; color:#f4f4f5; font-variant-numeric:tabular-nums;">61</div></div>
+            <div><div style="font-size:11px; color:#71717a;">Variações</div><div style="font-size:16px; font-weight:700; color:#f4f4f5; font-variant-numeric:tabular-nums;">34</div></div>
+            <div><div style="font-size:11px; color:#71717a;">País</div><div style="font-size:16px; font-weight:700; color:#f4f4f5;">🇧🇷 BR</div></div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid #27272a; padding-top:14px;">
+            <span style="font-size:12px; color:#a1a1aa;">Scale Score</span>
+            <span style="display:inline-flex; align-items:center; gap:8px;"><span style="font-size:22px; font-weight:800; color:#f59e0b; font-variant-numeric:tabular-nums;">92</span><span style="font-size:10px; font-weight:800; color:#09090b; background:#f59e0b; padding:3px 8px; border-radius:6px; letter-spacing:0.04em; animation:umbraPulse 2s infinite;">ESCALANDO</span></span>
+          </div>
+        </div>
+      </div>
+      <!-- card 3 blurred/locked -->
+      <div style="border:1px solid #27272a; border-radius:16px; overflow:hidden; background:#18181b; position:relative;">
+        <div style="filter:blur(6px); pointer-events:none;">
+          <div style="height:180px; background:linear-gradient(135deg,#1f1f23,#3f3f46);"></div>
+          <div style="padding:18px;">
+            <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:12px;">Oferta bloqueada</div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:14px;">
+              <div><div style="font-size:11px; color:#71717a;">Dias no ar</div><div style="font-size:16px; font-weight:700; color:#f4f4f5;">38</div></div>
+              <div><div style="font-size:11px; color:#71717a;">Variações</div><div style="font-size:16px; font-weight:700; color:#f4f4f5;">19</div></div>
+              <div><div style="font-size:11px; color:#71717a;">País</div><div style="font-size:16px; font-weight:700; color:#f4f4f5;">🇧🇷 BR</div></div>
+            </div>
+            <div style="border-top:1px solid #27272a; padding-top:14px; font-size:22px; font-weight:800; color:#f59e0b;">79</div>
+          </div>
+        </div>
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:rgba(9,9,11,0.55);">
+          <div style="width:48px; height:48px; border-radius:999px; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.4); display:flex; align-items:center; justify-content:center; font-size:22px;">🔒</div>
+          <div style="font-size:14px; font-weight:700; color:#f4f4f5; text-align:center; max-width:180px;">Desbloqueie o feed completo</div>
+          <a href="#planos" style="font-size:13px; font-weight:700; color:#09090b; background:#f59e0b; padding:9px 18px; border-radius:8px;" style-hover="background:#fbbf24;">Ver planos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
+<section id="como" style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+  <div style="text-align:center; margin-bottom:56px;">
+    <div style="font-size:13px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;">Como funciona</div>
+    <h2 style="font-size:38px; font-weight:800; letter-spacing:-0.025em; color:#f4f4f5; margin:0; line-height:1.1;">Três passos pra sair do escuro</h2>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
+    <div>
+      <div style="font-size:56px; font-weight:900; color:#f59e0b; letter-spacing:-0.03em; line-height:1;">01</div>
+      <div style="font-size:20px; font-weight:700; color:#f4f4f5; margin:16px 0 10px;">Descubra</div>
+      <p style="font-size:15px; color:#a1a1aa; line-height:1.6; margin:0;">Abra o feed de ofertas escaladas e filtre pelo seu nicho. Em segundos você vê o que está bombando.</p>
+    </div>
+    <div>
+      <div style="font-size:56px; font-weight:900; color:#f59e0b; letter-spacing:-0.03em; line-height:1;">02</div>
+      <div style="font-size:20px; font-weight:700; color:#f4f4f5; margin:16px 0 10px;">Estude</div>
+      <p style="font-size:15px; color:#a1a1aa; line-height:1.6; margin:0;">Copy completa, variações, tempo no ar e histórico de escala de cada anúncio. Dados, não achismo.</p>
+    </div>
+    <div>
+      <div style="font-size:56px; font-weight:900; color:#f59e0b; letter-spacing:-0.03em; line-height:1;">03</div>
+      <div style="font-size:20px; font-weight:700; color:#f4f4f5; margin:16px 0 10px;">Modele e lance</div>
+      <p style="font-size:15px; color:#a1a1aa; line-height:1.6; margin:0;">Adapte o vencedor pro seu produto e suba com chance real de escalar. Sem queimar verba testando.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECURSOS ============ -->
+<section id="recursos" style="border-top:1px solid #27272a; background:#0c0c0e;">
+  <div style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+    <div style="text-align:center; margin-bottom:56px;">
+      <div style="font-size:13px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;">Recursos</div>
+      <h2 style="font-size:38px; font-weight:800; letter-spacing:-0.025em; color:#f4f4f5; margin:0; line-height:1.1;">Tudo pra modelar o que já vende</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+      <sc-for list="{{ recursos }}" as="item" hint-placeholder-count="6">
+        <div style="border:1px solid #27272a; border-radius:16px; padding:26px; background:#18181b;" style-hover="border-color:#3f3f46;">
+          <div style="width:44px; height:44px; border-radius:10px; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); display:flex; align-items:center; justify-content:center; color:#f59e0b; margin-bottom:18px;">{{ item.icon }}</div>
+          <div style="font-size:16px; font-weight:700; color:#f4f4f5; margin-bottom:8px;">{{ item.title }}</div>
+          <p style="font-size:14px; color:#a1a1aa; line-height:1.6; margin:0;">{{ item.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOIMENTOS ============ -->
+<section style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+  <div style="text-align:center; margin-bottom:56px;">
+    <div style="font-size:13px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;">Depoimentos</div>
+    <h2 style="font-size:38px; font-weight:800; letter-spacing:-0.025em; color:#f4f4f5; margin:0; line-height:1.1;">Quem parou de chutar</h2>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;">
+    <sc-for list="{{ depoimentos }}" as="item" hint-placeholder-count="4">
+      <div style="border:1px solid #27272a; border-radius:16px; padding:28px; background:#18181b; display:flex; flex-direction:column; gap:18px;">
+        <div style="font-size:30px; font-weight:800; color:#f59e0b; letter-spacing:-0.02em; font-variant-numeric:tabular-nums;">{{ item.metric }}</div>
+        <p style="font-size:15px; color:#d4d4d8; line-height:1.6; margin:0; flex:1;">"{{ item.quote }}"</p>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:40px; height:40px; border-radius:999px; background:#27272a; color:#fcd34d; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center;">{{ item.initials }}</div>
+          <div><div style="font-size:14px; font-weight:600; color:#f4f4f5;">{{ item.name }}</div><div style="font-size:12.5px; color:#71717a;">{{ item.role }}</div></div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ============ PLANOS ============ -->
+<section id="planos" style="border-top:1px solid #27272a; background:#0c0c0e;">
+  <div style="max-width:1180px; margin:0 auto; padding:88px 32px;">
+    <div style="text-align:center; margin-bottom:56px;">
+      <div style="font-size:13px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;">Planos</div>
+      <h2 style="font-size:38px; font-weight:800; letter-spacing:-0.025em; color:#f4f4f5; margin:0; line-height:1.1;">Escolha seu nível de vantagem</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start;">
+      <!-- Básico -->
+      <div style="border:1px solid #27272a; border-radius:18px; padding:30px; background:#18181b;">
+        <div style="font-size:15px; font-weight:700; color:#f4f4f5;">Básico</div>
+        <div style="margin:16px 0 6px;"><span style="font-size:40px; font-weight:800; color:#f4f4f5; letter-spacing:-0.02em;">R$47</span><span style="font-size:14px; color:#71717a;">/mês</span></div>
+        <div style="font-size:13px; color:#71717a; margin-bottom:24px;">Pra sair do achismo.</div>
+        <a href="#" style="display:block; text-align:center; font-size:14px; font-weight:700; color:#d4d4d8; border:1px solid #3f3f46; padding:12px; border-radius:10px; margin-bottom:24px;" style-hover="border-color:#71717a; color:#f4f4f5;">Assinar Básico</a>
+        <sc-for list="{{ planoBasico }}" as="f" hint-placeholder-count="3">
+          <div style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; font-size:14px; color:#d4d4d8;"><span style="color:#34d399; font-weight:800;">✓</span>{{ f }}</div>
+        </sc-for>
+      </div>
+      <!-- Pro destaque -->
+      <div style="border:1.5px solid #f59e0b; border-radius:18px; padding:30px; background:linear-gradient(180deg,rgba(245,158,11,0.06),#18181b); position:relative; box-shadow:0 20px 60px -20px rgba(245,158,11,0.25);">
+        <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); font-size:11px; font-weight:800; color:#09090b; background:#f59e0b; padding:5px 14px; border-radius:999px; letter-spacing:0.05em;">POPULAR</div>
+        <div style="font-size:15px; font-weight:700; color:#f59e0b;">Pro</div>
+        <div style="margin:16px 0 6px;"><span style="font-size:40px; font-weight:800; color:#f4f4f5; letter-spacing:-0.02em;">R$97</span><span style="font-size:14px; color:#71717a;">/mês</span></div>
+        <div style="font-size:13px; color:#a1a1aa; margin-bottom:24px;">Pra quem já roda tráfego a sério.</div>
+        <a href="#" style="display:block; text-align:center; font-size:14px; font-weight:700; color:#09090b; background:#f59e0b; padding:12px; border-radius:10px; margin-bottom:24px;" style-hover="background:#fbbf24;">Assinar Pro</a>
+        <sc-for list="{{ planoPro }}" as="f" hint-placeholder-count="4">
+          <div style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; font-size:14px; color:#d4d4d8;"><span style="color:#34d399; font-weight:800;">✓</span>{{ f }}</div>
+        </sc-for>
+      </div>
+      <!-- Elite -->
+      <div style="border:1px solid #27272a; border-radius:18px; padding:30px; background:#18181b;">
+        <div style="font-size:15px; font-weight:700; color:#f4f4f5;">Elite</div>
+        <div style="margin:16px 0 6px;"><span style="font-size:40px; font-weight:800; color:#f4f4f5; letter-spacing:-0.02em;">R$197</span><span style="font-size:14px; color:#71717a;">/mês</span></div>
+        <div style="font-size:13px; color:#71717a; margin-bottom:24px;">Pra agência e operação pesada.</div>
+        <a href="#" style="display:block; text-align:center; font-size:14px; font-weight:700; color:#d4d4d8; border:1px solid #3f3f46; padding:12px; border-radius:10px; margin-bottom:24px;" style-hover="border-color:#71717a; color:#f4f4f5;">Assinar Elite</a>
+        <sc-for list="{{ planoElite }}" as="f" hint-placeholder-count="5">
+          <div style="display:flex; gap:10px; align-items:flex-start; padding:8px 0; font-size:14px; color:#d4d4d8;"><span style="color:#34d399; font-weight:800;">✓</span>{{ f }}</div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:32px; font-size:13px; color:#71717a;">Pagamento via Pix, cartão ou boleto &nbsp;•&nbsp; Garantia incondicional de 7 dias</div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" style="max-width:820px; margin:0 auto; padding:88px 32px;">
+  <div style="text-align:center; margin-bottom:48px;">
+    <div style="font-size:13px; font-weight:700; color:#f59e0b; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;">FAQ</div>
+    <h2 style="font-size:38px; font-weight:800; letter-spacing:-0.025em; color:#f4f4f5; margin:0; line-height:1.1;">Perguntas frequentes</h2>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:12px;">
+    <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="6">
+      <div style="border:1px solid #27272a; border-radius:12px; background:#18181b; overflow:hidden;">
+        <div onClick="{{ item.toggle }}" style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px; cursor:pointer; gap:16px;">
+          <span style="font-size:16px; font-weight:600; color:#f4f4f5;">{{ item.q }}</span>
+          <span style="font-size:20px; color:#f59e0b; font-weight:700; flex-shrink:0;">{{ item.sign }}</span>
+        </div>
+        <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 24px 22px; font-size:15px; color:#a1a1aa; line-height:1.65;">{{ item.a }}</div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section style="max-width:1180px; margin:0 auto; padding:0 32px 88px;">
+  <div style="border:1px solid #27272a; border-radius:24px; background:#18181b; padding:72px 40px; text-align:center;">
+    <h2 style="font-size:42px; font-weight:900; letter-spacing:-0.03em; color:#f4f4f5; margin:0 0 14px; line-height:1.05;">Pronto pra parar de <span style="color:#f59e0b;">queimar verba</span>?</h2>
+    <p style="font-size:18px; color:#a1a1aa; margin:0 0 32px;">Entre pro lado dos que escalam com dados.</p>
+    <a href="#planos" style="display:inline-block; font-size:16px; font-weight:700; color:#09090b; background:#f59e0b; padding:17px 34px; border-radius:12px;" style-hover="background:#fbbf24;">Quero meu acesso</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="border-top:1px solid #27272a; background:#0c0c0e;">
+  <div style="max-width:1180px; margin:0 auto; padding:56px 32px 40px; display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:40px;">
+    <div>
+      <div style="font-size:20px; font-weight:800; letter-spacing:-0.02em; color:#f4f4f5; margin-bottom:12px;">Umbra<span style="color:#f59e0b;">Ads</span></div>
+      <p style="font-size:14px; color:#71717a; line-height:1.6; margin:0; max-width:260px;">Inteligência de anúncios pra quem escala.</p>
+    </div>
+    <div>
+      <div style="font-size:13px; font-weight:700; color:#f4f4f5; margin-bottom:16px;">Produto</div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;"><a href="#recursos" style="color:#a1a1aa;">Recursos</a><a href="#planos" style="color:#a1a1aa;">Planos</a><a href="#como" style="color:#a1a1aa;">Como funciona</a></div>
+    </div>
+    <div>
+      <div style="font-size:13px; font-weight:700; color:#f4f4f5; margin-bottom:16px;">Suporte</div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;"><a href="#faq" style="color:#a1a1aa;">FAQ</a><a href="#" style="color:#a1a1aa;">Central de ajuda</a><a href="#" style="color:#a1a1aa;">Contato</a></div>
+    </div>
+    <div>
+      <div style="font-size:13px; font-weight:700; color:#f4f4f5; margin-bottom:16px;">Legal</div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:14px;"><a href="#" style="color:#a1a1aa;">Termos</a><a href="#" style="color:#a1a1aa;">Privacidade</a></div>
+    </div>
+  </div>
+  <div style="max-width:1180px; margin:0 auto; padding:20px 32px 40px; border-top:1px solid #27272a; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+    <div style="font-size:12.5px; color:#52525b;">Dados públicos da Biblioteca de Anúncios da Meta. Não afiliado à Meta Platforms, Inc.</div>
+    <div style="font-size:12.5px; color:#52525b;">© 2026 UmbraAds. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { openFaq: 0 };
+
+  renderVals() {
+    const semItems = [
+      "Testa dezenas de criativos no chute e queima verba antes de achar um que presta.",
+      "Descobre tarde demais que a oferta já saturou.",
+      "Não sabe se o concorrente está escalando ou só fazendo barulho.",
+      "Decisão por achismo, torcida e print de grupo de Telegram."
+    ];
+    const comItems = [
+      "Modela o que JÁ está vendendo e validado no mercado.",
+      "Vê o tempo no ar e o histórico de escala antes de investir.",
+      "Sabe exatamente quantos criativos cada concorrente roda.",
+      "Decisão por dado: Scale Score, variações ativas e crescimento 7d."
+    ];
+    const recursos = [
+      { icon: "📈", title: "Ofertas escaladas em tempo real", desc: "Veja o que tá bombando agora e quantos criativos cada oferta roda." },
+      { icon: "🎯", title: "Scale Score", desc: "Nossa pontuação exclusiva que separa oferta validada de fogo de palha." },
+      { icon: "🔄", title: "Monitoramento contínuo", desc: "Marque uma oferta e a gente re-verifica todo dia por você." },
+      { icon: "🕵️", title: "Rastreie concorrentes", desc: "Alerta na hora que uma página subir criativo novo." },
+      { icon: "🔍", title: "Busca avançada", desc: "Filtre por nicho, país, formato, tempo no ar e nº de variações." },
+      { icon: "📊", title: "Histórico de escala", desc: "Gráfico da evolução de anúncios ativos de cada página ao longo do tempo." }
+    ];
+    const depoimentos = [
+      { metric: "CPA −31%", quote: "Parei de testar no escuro. Modelei duas ofertas do feed e meu custo por aquisição despencou na primeira semana.", initials: "RM", name: "Rafael Moura", role: "Gestor de tráfego" },
+      { metric: "R$ 120k/mês", quote: "Achei um ângulo que ninguém no meu nicho estava usando ainda. Escalei do zero pra seis dígitos por mês.", initials: "JP", name: "Juliana Prado", role: "Infoprodutora" },
+      { metric: "8h/semana", quote: "O que a agência levava horas garimpando na biblioteca da Meta, a gente resolve em minutos. Economia real de tempo.", initials: "LC", name: "Lucas Camargo", role: "Sócio de agência" },
+      { metric: "3x ROAS", quote: "Modelei o criativo campeão de um gringo, adaptei pro BR e triplicei meu ROAS. Dados, não achismo.", initials: "TS", name: "Thiago Souza", role: "Dropshipper" }
+    ];
+    const planoBasico = ["50 buscas por dia", "15 ofertas monitoradas", "Feed completo de ofertas escaladas"];
+    const planoPro = ["Buscas ilimitadas", "50 ofertas monitoradas", "15 rastreios com alertas", "Histórico de escala 90 dias"];
+    const planoElite = ["Tudo ilimitado", "50 rastreios com alertas", "Export CSV", "Histórico completo", "Acesso antecipado a novos recursos"];
+    const faqRaw = [
+      { q: "De onde vêm os dados?", a: "Direto da Biblioteca de Anúncios da Meta, a base pública de todos os anúncios ativos do Facebook e Instagram. A gente organiza, cruza e pontua esses dados pra você não precisar garimpar na mão." },
+      { q: "Preciso saber rodar tráfego?", a: "Ajuda, mas não é obrigatório. Se você já roda, o UmbraAds encurta seu caminho pra escala. Se está começando, você aprende modelando quem já acertou em vez de queimar verba no chute." },
+      { q: "Funciona pro meu nicho?", a: "Se tem gente anunciando no seu nicho no Brasil, tem dado aqui. Emagrecimento, renda extra, infoproduto, e-commerce, dropshipping, serviço local — filtre e veja o que está escalando." },
+      { q: "Quantos anúncios entram por dia?", a: "Centenas de novas variações são capturadas e re-verificadas diariamente. Nosso monitoramento roda 24/7 pra você nunca ficar pra trás de uma oferta subindo." },
+      { q: "Posso cancelar quando quiser?", a: "Sim. Sem fidelidade, sem multa, sem pegadinha. Cancela com um clique dentro do painel e não é cobrado no próximo ciclo." },
+      { q: "Tem garantia?", a: "Garantia incondicional de 7 dias. Se não fizer sentido pra você, devolvemos 100% do valor sem perguntar nada." }
+    ];
+    const faqs = faqRaw.map((f, i) => ({
+      q: f.q, a: f.a,
+      open: this.state.openFaq === i,
+      sign: this.state.openFaq === i ? "−" : "+",
+      toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i }))
+    }));
+
+    return { semItems, comItems, recursos, depoimentos, planoBasico, planoPro, planoElite, faqs };
+  }
+}
+</script>
+</body>
+</html>

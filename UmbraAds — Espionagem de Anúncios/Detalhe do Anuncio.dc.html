@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #09090b; color: #d4d4d8; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #a1a1aa; text-decoration: none; }
+  a:hover { color: #f4f4f5; }
+  ::selection { background: rgba(245,158,11,0.3); }
+  @keyframes umbraPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.5); } 50% { box-shadow: 0 0 0 5px rgba(245,158,11,0); } }
+  .u-scroll::-webkit-scrollbar { height:8px; }
+  .u-scroll::-webkit-scrollbar-track { background:#09090b; border-radius:999px; }
+  .u-scroll::-webkit-scrollbar-thumb { background:#3f3f46; border-radius:999px; }
+</style>
+</helmet>
+
+<div style="display:flex; min-height:100vh; background:#09090b;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:240px; flex-shrink:0; background:#18181b; border-right:1px solid #27272a; display:flex; flex-direction:column; position:sticky; top:0; height:100vh;">
+    <div style="padding:22px 22px 18px; font-size:19px; font-weight:800; letter-spacing:-0.02em; color:#f4f4f5;">Umbra<span style="color:#f59e0b;">Ads</span></div>
+    <nav style="padding:8px 12px; display:flex; flex-direction:column; gap:3px;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+        <a href="#" style="{{ item.style }}">
+          <span style="width:18px; display:inline-flex; justify-content:center;">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="margin-left:auto; font-size:11px; font-weight:700; color:#09090b; background:#f59e0b; border-radius:999px; padding:1px 7px;">{{ item.badge }}</span>
+          </sc-if>
+        </a>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto; padding:14px;">
+      <div style="border:1px solid #27272a; border-radius:14px; background:#09090b; padding:16px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+          <span style="font-size:11px; font-weight:800; color:#09090b; background:#f59e0b; padding:2px 8px; border-radius:6px; letter-spacing:0.04em;">PRO</span>
+          <span style="font-size:13px; font-weight:700; color:#f4f4f5;">Plano Pro</span>
+        </div>
+        <div style="font-size:12px; color:#71717a; line-height:1.5; margin-bottom:12px;">Rastreios: 11 de 15 usados.</div>
+        <button style="width:100%; background:#f59e0b; color:#09090b; font-size:13px; font-weight:700; font-family:inherit; border:none; border-radius:8px; padding:9px; cursor:pointer;" style-hover="background:#fbbf24;">Fazer upgrade</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1; min-width:0; display:flex; flex-direction:column;">
+
+    <header style="height:60px; border-bottom:1px solid #27272a; background:rgba(9,9,11,0.8); backdrop-filter:blur(12px); position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:0 28px;">
+      <div style="font-size:13.5px; color:#71717a; font-weight:500;"><span style="color:#a1a1aa;">Ofertas Escaladas</span> &nbsp;/&nbsp; <span style="color:#f4f4f5;">Detalhe</span></div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <div style="position:relative; cursor:pointer;"><span style="font-size:19px;">🔔</span><span style="position:absolute; top:-4px; right:-6px; font-size:10px; font-weight:800; color:#09090b; background:#f59e0b; border-radius:999px; padding:1px 5px;">4</span></div>
+        <div style="width:34px; height:34px; border-radius:999px; background:#27272a; color:#fcd34d; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">CS</div>
+      </div>
+    </header>
+
+    <main style="padding:28px 32px 48px; max-width:1320px; width:100%;">
+
+      <div style="display:grid; grid-template-columns:1.25fr 1fr; gap:24px; align-items:start;">
+
+        <!-- ======= COLUNA ESQUERDA ======= -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+
+          <!-- player -->
+          <div style="position:relative; aspect-ratio:16/10; border:1px solid #27272a; border-radius:16px; overflow:hidden; background:linear-gradient(135deg,#2a2118,#4a3a20);">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+              <div style="width:72px; height:72px; border-radius:999px; background:rgba(245,158,11,0.92); display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 10px 40px rgba(245,158,11,0.4);" style-hover="background:#fbbf24;">
+                <span style="font-size:26px; color:#09090b; margin-left:4px;">▶</span>
+              </div>
+            </div>
+            <div style="position:absolute; top:12px; left:12px; display:flex; align-items:center; gap:6px; background:rgba(9,9,11,0.7); backdrop-filter:blur(4px); padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:600; color:#34d399;"><span style="width:6px;height:6px;border-radius:999px;background:#10b981;display:inline-block;"></span>Ativo</div>
+            <div style="position:absolute; bottom:12px; right:12px; background:rgba(9,9,11,0.7); backdrop-filter:blur(4px); padding:4px 10px; border-radius:6px; font-size:11.5px; font-weight:600; color:#d4d4d8;">▶ Vídeo · 0:38</div>
+          </div>
+
+          <!-- variações -->
+          <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:18px;">
+            <div style="font-size:14px; font-weight:700; color:#f4f4f5; margin-bottom:14px;">Variações ativas <span style="color:#71717a; font-weight:600;">(24)</span></div>
+            <div class="u-scroll" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:8px;">
+              <sc-for list="{{ variacoes }}" as="v" hint-placeholder-count="8">
+                <div onClick="{{ v.select }}" style="flex-shrink:0; width:78px; aspect-ratio:9/12; border-radius:10px; background:{{ v.thumb }}; border:2px solid {{ v.border }}; cursor:pointer; position:relative;">
+                  <span style="position:absolute; bottom:5px; left:5px; font-size:9px; font-weight:700; color:#f4f4f5; background:rgba(9,9,11,0.6); padding:1px 5px; border-radius:4px;">{{ v.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- evolução -->
+          <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:20px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div>
+                <div style="font-size:14px; font-weight:700; color:#f4f4f5;">Evolução da página</div>
+                <div style="font-size:12px; color:#71717a; margin-top:2px;">Anúncios ativos · últimos 60 dias</div>
+              </div>
+              <span style="font-size:12px; font-weight:700; color:#34d399;">↑ +240%</span>
+            </div>
+            <div style="position:relative;">
+              <svg viewBox="0 0 560 200" style="width:100%; height:auto; display:block;">
+                <defs>
+                  <linearGradient id="uarea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <line x1="0" y1="50" x2="560" y2="50" stroke="#27272a" stroke-width="1"/>
+                <line x1="0" y1="100" x2="560" y2="100" stroke="#27272a" stroke-width="1"/>
+                <line x1="0" y1="150" x2="560" y2="150" stroke="#27272a" stroke-width="1"/>
+                <path d="M0,180 C40,175 70,168 100,160 C140,150 160,140 200,120 C240,102 270,95 310,78 C350,62 380,52 420,44 C450,38 480,40 500,34 L560,30 L560,200 L0,200 Z" fill="url(#uarea)"/>
+                <path d="M0,180 C40,175 70,168 100,160 C140,150 160,140 200,120 C240,102 270,95 310,78 C350,62 380,52 420,44 C450,38 480,40 500,34 L560,30" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+                <circle cx="500" cy="34" r="4.5" fill="#f59e0b" stroke="#18181b" stroke-width="2"/>
+              </svg>
+              <div style="position:absolute; top:8px; right:56px; background:#09090b; border:1px solid #3f3f46; border-radius:8px; padding:5px 10px; text-align:center;">
+                <div style="font-size:9px; color:#71717a; letter-spacing:0.04em;">PICO</div>
+                <div style="font-size:14px; font-weight:800; color:#f59e0b; font-variant-numeric:tabular-nums;">24 ativos</div>
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:#52525b; margin-top:8px;"><span>-60d</span><span>-40d</span><span>-20d</span><span>hoje</span></div>
+          </div>
+        </div>
+
+        <!-- ======= COLUNA DIREITA ======= -->
+        <div style="display:flex; flex-direction:column; gap:18px;">
+
+          <!-- cabeçalho página -->
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div style="width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,#2a2118,#4a3a20); flex-shrink:0;"></div>
+            <div style="min-width:0; flex:1;">
+              <div style="font-size:18px; font-weight:800; color:#f4f4f5; letter-spacing:-0.01em;">Achadinhos da Bia</div>
+              <div style="display:flex; align-items:center; gap:6px; font-size:12.5px; color:#a1a1aa; margin-top:3px;"><span style="width:7px;height:7px;border-radius:999px;background:#10b981;display:inline-block;"></span>Ativo há 38 dias</div>
+            </div>
+            <a href="#" style="font-size:12.5px; font-weight:600; color:#f59e0b; white-space:nowrap;">Ver todos da página →</a>
+          </div>
+
+          <!-- métricas destaque -->
+          <div style="border:1px solid rgba(245,158,11,0.35); border-radius:16px; background:linear-gradient(180deg,rgba(245,158,11,0.06),#18181b); padding:24px;">
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div style="font-size:64px; font-weight:900; color:#f59e0b; line-height:0.9; letter-spacing:-0.03em; font-variant-numeric:tabular-nums;">88</div>
+              <div>
+                <div style="font-size:11px; font-weight:700; color:#a1a1aa; letter-spacing:0.06em; margin-bottom:6px;">SCALE SCORE</div>
+                <span style="font-size:11px; font-weight:800; color:#09090b; background:#f59e0b; padding:4px 10px; border-radius:7px; letter-spacing:0.04em; animation:umbraPulse 2s infinite; display:inline-block;">ESCALANDO</span>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px; padding-top:20px; border-top:1px solid #27272a;">
+              <div>
+                <div style="font-size:20px; font-weight:800; color:#f4f4f5; font-variant-numeric:tabular-nums;">24</div>
+                <div style="font-size:11px; color:#71717a; margin-top:2px;">variações ativas</div>
+                <div style="font-size:11px; font-weight:700; color:#34d399; margin-top:3px;">↑ +9 esta semana</div>
+              </div>
+              <div>
+                <div style="font-size:20px; font-weight:800; color:#f4f4f5; font-variant-numeric:tabular-nums;">38</div>
+                <div style="font-size:11px; color:#71717a; margin-top:2px;">dias no ar</div>
+              </div>
+              <div>
+                <div style="font-size:20px; font-weight:800; color:#f4f4f5;">🇧🇷 BR</div>
+                <div style="font-size:11px; color:#71717a; margin-top:2px;">país</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- copy -->
+          <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:20px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+              <div style="font-size:14px; font-weight:700; color:#f4f4f5;">Copy do anúncio</div>
+              <button onClick="{{ copyText }}" style="{{ copyBtnStyle }}">{{ copyLabel }}</button>
+            </div>
+            <p style="font-size:14px; color:#d4d4d8; line-height:1.65; margin:0; white-space:pre-line;">{{ adCopy }}</p>
+          </div>
+
+          <!-- info -->
+          <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:6px 20px;">
+            <sc-for list="{{ infoRows }}" as="row" hint-placeholder-count="6">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; border-bottom:1px solid #27272a;">
+                <span style="font-size:12.5px; color:#71717a;">{{ row.label }}</span>
+                <span style="font-size:13px; font-weight:600; color:#f4f4f5; text-align:right;">{{ row.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- ações -->
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <button style="width:100%; background:#f59e0b; color:#09090b; font-size:15px; font-weight:700; font-family:inherit; border:none; border-radius:10px; padding:14px; cursor:pointer;" style-hover="background:#fbbf24;">👁 Monitorar esta oferta</button>
+            <button style="width:100%; background:transparent; border:1px solid #3f3f46; color:#f4f4f5; font-size:15px; font-weight:600; font-family:inherit; border-radius:10px; padding:14px; cursor:pointer;" style-hover="border-color:#71717a; background:#1f1f23;">🔔 Rastrear esta página</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= MAIS DESTA PÁGINA ======= -->
+      <div style="margin-top:40px;">
+        <div style="font-size:18px; font-weight:700; color:#f4f4f5; margin-bottom:18px;">Mais anúncios desta página</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+          <sc-for list="{{ maisAds }}" as="ad" hint-placeholder-count="4">
+            <div style="border:1px solid #27272a; border-radius:14px; background:#18181b; overflow:hidden;" style-hover="border-color:#3f3f46;">
+              <div style="position:relative; aspect-ratio:16/9; background:{{ ad.thumb }};">
+                <div style="position:absolute; bottom:8px; left:8px; background:rgba(9,9,11,0.72); backdrop-filter:blur(4px); padding:2px 8px; border-radius:5px; font-size:10px; font-weight:600; color:#d4d4d8;">{{ ad.type }}</div>
+                <span style="position:absolute; top:8px; right:8px; font-size:10.5px; font-weight:800; color:{{ ad.scoreTextColor }}; background:{{ ad.scoreBg }}; border:1px solid {{ ad.scoreBorder }}; border-radius:7px; padding:3px 7px; font-variant-numeric:tabular-nums;">{{ ad.score }}</span>
+              </div>
+              <div style="padding:13px;">
+                <div style="font-size:13px; font-weight:700; color:#f4f4f5; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ ad.name }}</div>
+                <div style="display:flex; align-items:center; gap:6px; font-size:11.5px; color:#a1a1aa; margin-top:5px;"><span style="width:6px;height:6px;border-radius:999px;background:#10b981;display:inline-block;"></span>Ativo há {{ ad.days }} dias · {{ ad.vars }} var.</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { selVar: 0, copied: false };
+
+  renderVals() {
+    const activeNav = "display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:9px; font-size:14px; font-weight:600; background:#27272a; color:#f59e0b;";
+    const idleNav = "display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:9px; font-size:14px; font-weight:500; background:transparent; color:#a1a1aa;";
+    const navItems = [
+      { label: "Dashboard", icon: "▚", style: idleNav, badge: null },
+      { label: "Ofertas Escaladas", icon: "🔥", style: activeNav, badge: null },
+      { label: "Monitorando", icon: "👁", style: idleNav, badge: null },
+      { label: "Rastreados & Alertas", icon: "🎯", style: idleNav, badge: "4" },
+      { label: "Ajustes", icon: "⚙", style: idleNav, badge: null }
+    ];
+
+    const g = (a,b) => `linear-gradient(135deg,${a},${b})`;
+    const thumbs = [g("#2a2118","#4a3a20"), g("#28241a","#48401f"), g("#2a2618","#4a4020"), g("#242018","#463c1e")];
+    const variacoes = Array.from({length:8}).map((_,i) => ({
+      thumb: thumbs[i % thumbs.length],
+      border: this.state.selVar === i ? "#f59e0b" : "#27272a",
+      label: "v" + (i+1),
+      select: () => this.setState({ selVar: i })
+    }));
+
+    const adCopy = "🚨 PAREI DE COMPRAR NA LOJA depois que descobri isso!\n\nEssa air fryer faz TUDO: assa, frita, esquenta e ainda economiza gás. 😱🔥\n\n✅ Comida crocante sem óleo\n✅ Pronta em 12 minutos\n✅ Fácil de limpar\n\n👉 Últimas unidades com 40% OFF + FRETE GRÁTIS pro Brasil todo. Corre que acaba HOJE! 🛒";
+
+    const copied = this.state.copied;
+    const copyText = () => {
+      this.setState({ copied: true });
+      if (this._t) clearTimeout(this._t);
+      this._t = setTimeout(() => this.setState({ copied: false }), 1800);
+    };
+    const copyBtnBase = "font-size:12.5px; font-weight:700; font-family:inherit; border-radius:8px; padding:6px 14px; cursor:pointer; transition:all .15s;";
+    const copyBtnStyle = copied
+      ? copyBtnBase + " background:rgba(16,185,129,0.14); border:1px solid rgba(16,185,129,0.4); color:#34d399;"
+      : copyBtnBase + " background:transparent; border:1px solid #3f3f46; color:#d4d4d8;";
+    const copyLabel = copied ? "✓ Copiado!" : "Copiar";
+
+    const infoRows = [
+      { label: "CTA do anúncio", value: "Saiba mais" },
+      { label: "Landing page", value: "achadinhosdabia.com ↗" },
+      { label: "Idioma", value: "PT-BR" },
+      { label: "Formato", value: "Vídeo" },
+      { label: "Nicho", value: "Casa & Cozinha" },
+      { label: "Primeira veiculação", value: "02/06/2026" }
+    ];
+
+    const scoreStyle = (s) => s >= 71
+      ? { textColor: "#09090b", bg: "#f59e0b", border: "#f59e0b" }
+      : s >= 31 ? { textColor: "#fcd34d", bg: "rgba(245,158,11,0.14)", border: "rgba(245,158,11,0.4)" }
+      : { textColor: "#a1a1aa", bg: "rgba(113,113,122,0.16)", border: "#3f3f46" };
+    const maisRaw = [
+      { name: "Panela Antiaderente Pro", score: 82, days: 29, vars: 16, type: "🖼 Imagem", thumb: g("#28241a","#48401f") },
+      { name: "Kit Organizador Cozinha", score: 74, days: 21, vars: 12, type: "⧉ Carrossel", thumb: g("#2a2618","#4a4020") },
+      { name: "Liquidificador Turbo 5L", score: 67, days: 34, vars: 19, type: "▶ Vídeo", thumb: g("#242018","#463c1e") },
+      { name: "Jogo de Facas Premium", score: 58, days: 17, vars: 9, type: "🖼 Imagem", thumb: g("#2a2118","#4a3a20") }
+    ];
+    const maisAds = maisRaw.map(a => { const ss = scoreStyle(a.score); return { ...a, scoreTextColor: ss.textColor, scoreBg: ss.bg, scoreBorder: ss.border }; });
+
+    return { navItems, variacoes, adCopy, copyText, copyBtnStyle, copyLabel, infoRows, maisAds };
+  }
+}
+</script>
+</body>
+</html>

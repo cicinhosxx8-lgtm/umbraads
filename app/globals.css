@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base global espelhando o <style> compartilhado dos HTMLs de design. */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    margin: 0;
+    background: #09090b; /* zinc-950 */
+    color: #d4d4d8; /* zinc-300 */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(245, 158, 11, 0.3); /* amber-500 @ 30% */
+  }
+
+  /* Métricas/números sempre com largura tabular (evita "pulo" de dígitos). */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}

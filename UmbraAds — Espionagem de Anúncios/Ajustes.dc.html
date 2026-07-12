@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #09090b; color: #d4d4d8; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #a1a1aa; text-decoration: none; }
+  a:hover { color: #f4f4f5; }
+  ::selection { background: rgba(245,158,11,0.3); }
+  .u-in { background:#09090b; border:1px solid #27272a; border-radius:10px; padding:11px 14px; font-size:14px; color:#f4f4f5; font-family:inherit; outline:none; width:100%; }
+  .u-in::placeholder { color:#52525b; }
+  .u-in:focus { border-color:#f59e0b; }
+  .u-in:read-only { color:#a1a1aa; }
+</style>
+</helmet>
+
+<div style="display:flex; min-height:100vh; background:#09090b;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:240px; flex-shrink:0; background:#18181b; border-right:1px solid #27272a; display:flex; flex-direction:column; position:sticky; top:0; height:100vh;">
+    <div style="padding:22px 22px 18px; font-size:19px; font-weight:800; letter-spacing:-0.02em; color:#f4f4f5;">Umbra<span style="color:#f59e0b;">Ads</span></div>
+    <nav style="padding:8px 12px; display:flex; flex-direction:column; gap:3px;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+        <a href="#" style="{{ item.style }}">
+          <span style="width:18px; display:inline-flex; justify-content:center;">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="margin-left:auto; font-size:11px; font-weight:700; color:#09090b; background:#f59e0b; border-radius:999px; padding:1px 7px;">{{ item.badge }}</span>
+          </sc-if>
+        </a>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto; padding:14px;">
+      <div style="border:1px solid #27272a; border-radius:14px; background:#09090b; padding:16px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+          <span style="font-size:11px; font-weight:800; color:#09090b; background:#f59e0b; padding:2px 8px; border-radius:6px; letter-spacing:0.04em;">PRO</span>
+          <span style="font-size:13px; font-weight:700; color:#f4f4f5;">Plano Pro</span>
+        </div>
+        <div style="font-size:12px; color:#71717a; line-height:1.5; margin-bottom:12px;">Rastreios: 5 de 15 usados.</div>
+        <button style="width:100%; background:#f59e0b; color:#09090b; font-size:13px; font-weight:700; font-family:inherit; border:none; border-radius:8px; padding:9px; cursor:pointer;" style-hover="background:#fbbf24;">Fazer upgrade</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1; min-width:0; display:flex; flex-direction:column;">
+
+    <header style="height:60px; border-bottom:1px solid #27272a; background:rgba(9,9,11,0.8); backdrop-filter:blur(12px); position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:0 28px;">
+      <div style="font-size:13.5px; color:#71717a; font-weight:500;"><span style="color:#a1a1aa;">UmbraAds</span> &nbsp;/&nbsp; <span style="color:#f4f4f5;">Ajustes</span></div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <div style="position:relative; cursor:pointer;"><span style="font-size:19px;">🔔</span><span style="position:absolute; top:-4px; right:-6px; font-size:10px; font-weight:800; color:#09090b; background:#f59e0b; border-radius:999px; padding:1px 5px;">4</span></div>
+        <div style="width:34px; height:34px; border-radius:999px; background:#27272a; color:#fcd34d; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">CS</div>
+      </div>
+    </header>
+
+    <main style="padding:28px 32px 48px; max-width:1080px; width:100%;">
+
+      <div style="margin-bottom:24px;">
+        <h1 style="font-size:26px; font-weight:800; letter-spacing:-0.02em; color:#f4f4f5; margin:0;">Ajustes</h1>
+        <p style="font-size:15px; color:#a1a1aa; margin:8px 0 0;">Sua conta, seu plano, do seu jeito.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:200px 1fr; gap:32px; align-items:start;">
+
+        <!-- nav interna -->
+        <nav style="display:flex; flex-direction:column; gap:3px; position:sticky; top:84px;">
+          <sc-for list="{{ innerNav }}" as="n" hint-placeholder-count="4">
+            <button onClick="{{ n.select }}" style="{{ n.style }}">{{ n.label }}</button>
+          </sc-for>
+        </nav>
+
+        <!-- conteúdo -->
+        <div>
+
+          <!-- ===== PLANO & USO ===== -->
+          <sc-if value="{{ isPlano }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              <!-- plano atual -->
+              <div style="border:1px solid rgba(245,158,11,0.35); border-radius:16px; background:linear-gradient(180deg,rgba(245,158,11,0.05),#18181b); padding:24px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+                  <div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <span style="font-size:12px; font-weight:800; color:#09090b; background:#f59e0b; padding:3px 11px; border-radius:7px; letter-spacing:0.05em;">PRO</span>
+                      <span style="font-size:17px; font-weight:800; color:#f4f4f5;">Plano Pro</span>
+                    </div>
+                    <div style="font-size:13.5px; color:#a1a1aa; margin-top:8px;">R$97/mês · renova em 08/08/2026</div>
+                  </div>
+                  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button style="background:#f59e0b; color:#09090b; font-size:13.5px; font-weight:700; font-family:inherit; border:none; border-radius:9px; padding:10px 18px; cursor:pointer;" style-hover="background:#fbbf24;">Fazer upgrade pro Elite</button>
+                    <button style="background:transparent; border:1px solid #3f3f46; color:#d4d4d8; font-size:13.5px; font-weight:600; font-family:inherit; border-radius:9px; padding:10px 18px; cursor:pointer;" style-hover="border-color:#71717a; color:#f4f4f5;">Gerenciar assinatura</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- uso -->
+              <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+                <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:20px;">Uso do mês</div>
+                <div style="display:flex; flex-direction:column; gap:22px;">
+                  <div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;"><span style="font-size:13.5px; color:#a1a1aa;">Buscas hoje</span><span style="font-size:13.5px; font-weight:700; color:#f59e0b; font-variant-numeric:tabular-nums;">∞ ilimitado</span></div>
+                    <div style="height:7px; border-radius:999px; background:#27272a; overflow:hidden;"><div style="width:100%; height:100%; background:#f59e0b; border-radius:999px;"></div></div>
+                  </div>
+                  <div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;"><span style="font-size:13.5px; color:#a1a1aa;">Ofertas monitoradas</span><span style="font-size:13.5px; font-weight:700; color:#f4f4f5; font-variant-numeric:tabular-nums;">12 / 50</span></div>
+                    <div style="height:7px; border-radius:999px; background:#27272a; overflow:hidden;"><div style="width:24%; height:100%; background:#f59e0b; border-radius:999px;"></div></div>
+                  </div>
+                  <div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;"><span style="font-size:13.5px; color:#a1a1aa;">Rastreios</span><span style="font-size:13.5px; font-weight:700; color:#f4f4f5; font-variant-numeric:tabular-nums;">5 / 15</span></div>
+                    <div style="height:7px; border-radius:999px; background:#27272a; overflow:hidden;"><div style="width:33%; height:100%; background:#f59e0b; border-radius:999px;"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- comparativo -->
+              <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+                  <div style="font-size:15px; font-weight:700; color:#f4f4f5;">Pro vs Elite</div>
+                  <span style="font-size:12px; font-weight:700; color:#a1a1aa;">Você tá no <span style="color:#f59e0b;">Pro</span></span>
+                </div>
+                <div style="display:flex; flex-direction:column;">
+                  <div style="display:grid; grid-template-columns:1.8fr 1fr 1fr; gap:12px; padding-bottom:12px; border-bottom:1px solid #27272a;">
+                    <span style="font-size:12px; font-weight:700; color:#71717a; letter-spacing:0.03em;">RECURSO</span>
+                    <span style="font-size:12px; font-weight:700; color:#a1a1aa; text-align:center;">Pro</span>
+                    <span style="font-size:12px; font-weight:800; color:#f59e0b; text-align:center;">Elite</span>
+                  </div>
+                  <sc-for list="{{ compareRows }}" as="c" hint-placeholder-count="4">
+                    <div style="display:grid; grid-template-columns:1.8fr 1fr 1fr; gap:12px; padding:12px 0; border-bottom:1px solid #27272a; align-items:center;">
+                      <span style="font-size:13.5px; color:#d4d4d8;">{{ c.feature }}</span>
+                      <span style="font-size:13px; font-weight:600; color:#a1a1aa; text-align:center; font-variant-numeric:tabular-nums;">{{ c.pro }}</span>
+                      <span style="font-size:13px; font-weight:700; color:#fcd34d; text-align:center; font-variant-numeric:tabular-nums;">{{ c.elite }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <button style="width:100%; margin-top:18px; background:#f59e0b; color:#09090b; font-size:14px; font-weight:700; font-family:inherit; border:none; border-radius:10px; padding:12px; cursor:pointer;" style-hover="background:#fbbf24;">Subir pro Elite por R$197/mês</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ===== CONTA ===== -->
+          <sc-if value="{{ isConta }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+                <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:18px;">Dados da conta</div>
+                <div style="margin-bottom:18px;">
+                  <label style="font-size:12.5px; font-weight:600; color:#a1a1aa; display:block; margin-bottom:8px;">E-mail</label>
+                  <div style="display:flex; gap:10px;">
+                    <input class="u-in" type="email" value="cicero@umbraads.com.br" readOnly="{{ true }}" style="flex:1;" />
+                    <button style="background:transparent; border:1px solid #3f3f46; color:#d4d4d8; font-size:13px; font-weight:600; font-family:inherit; border-radius:10px; padding:0 18px; cursor:pointer; white-space:nowrap;" style-hover="border-color:#71717a; color:#f4f4f5;">Alterar</button>
+                  </div>
+                </div>
+              </div>
+
+              <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+                <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:18px;">Alterar senha</div>
+                <div style="display:flex; flex-direction:column; gap:14px; max-width:420px;">
+                  <div>
+                    <label style="font-size:12.5px; font-weight:600; color:#a1a1aa; display:block; margin-bottom:8px;">Senha atual</label>
+                    <input class="u-in" type="password" value="123456789" />
+                  </div>
+                  <div>
+                    <label style="font-size:12.5px; font-weight:600; color:#a1a1aa; display:block; margin-bottom:8px;">Nova senha</label>
+                    <input class="u-in" type="password" placeholder="Mínimo 8 caracteres" />
+                  </div>
+                  <button style="align-self:flex-start; background:#f59e0b; color:#09090b; font-size:13.5px; font-weight:700; font-family:inherit; border:none; border-radius:10px; padding:11px 22px; cursor:pointer; margin-top:4px;" style-hover="background:#fbbf24;">Salvar nova senha</button>
+                </div>
+              </div>
+
+              <!-- zona de perigo -->
+              <div style="border:1px solid rgba(239,68,68,0.4); border-radius:16px; background:rgba(239,68,68,0.04); padding:24px;">
+                <div style="font-size:15px; font-weight:700; color:#f87171; margin-bottom:8px;">Zona de perigo</div>
+                <p style="font-size:13.5px; color:#a1a1aa; margin:0 0 18px; line-height:1.55; max-width:520px;">Excluir sua conta apaga permanentemente seus rastreios, ofertas monitoradas e histórico. Não tem volta.</p>
+                <button style="background:transparent; border:1px solid rgba(239,68,68,0.5); color:#f87171; font-size:13.5px; font-weight:700; font-family:inherit; border-radius:10px; padding:11px 20px; cursor:pointer;" style-hover="background:rgba(239,68,68,0.12); border-color:#ef4444;">Excluir minha conta</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ===== PREFERÊNCIAS ===== -->
+          <sc-if value="{{ isPref }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+                <label style="font-size:15px; font-weight:700; color:#f4f4f5; display:block; margin-bottom:6px;">País padrão das buscas</label>
+                <p style="font-size:13px; color:#71717a; margin:0 0 14px;">Toda busca já abre filtrada por esse país.</p>
+                <select style="appearance:none; background:#09090b; border:1px solid #27272a; border-radius:10px; padding:11px 32px 11px 14px; font-size:14px; color:#d4d4d8; font-family:inherit; outline:none; cursor:pointer; min-width:220px;"><option>Brasil</option><option>Portugal</option><option>Estados Unidos</option><option>Todos os países</option></select>
+              </div>
+
+              <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+                <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:6px;">Nichos favoritos</div>
+                <p style="font-size:13px; color:#71717a; margin:0 0 16px;">A gente destaca ofertas desses nichos no seu Dashboard.</p>
+                <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                  <sc-for list="{{ nichos }}" as="n" hint-placeholder-count="5">
+                    <button onClick="{{ n.toggle }}" style="{{ n.style }}">{{ n.check }}{{ n.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
+                  <div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <span style="font-size:14.5px; font-weight:700; color:#f4f4f5;">Receber alertas por e-mail</span>
+                      <span style="font-size:10.5px; font-weight:700; color:#a78bfa; background:rgba(139,92,246,0.14); border:1px solid rgba(139,92,246,0.35); border-radius:6px; padding:2px 8px;">Em breve</span>
+                    </div>
+                    <p style="font-size:13px; color:#71717a; margin:6px 0 0;">Um resumo diário do que subiu no seu radar, direto no inbox.</p>
+                  </div>
+                  <label style="width:40px; height:22px; border-radius:999px; background:#3f3f46; position:relative; flex-shrink:0; opacity:0.5; cursor:not-allowed;"><span style="position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:999px; background:#a1a1aa;"></span></label>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- ===== SESSÕES ===== -->
+          <sc-if value="{{ isSessoes }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid #27272a; border-radius:16px; background:#18181b; padding:24px;">
+              <div style="font-size:15px; font-weight:700; color:#f4f4f5; margin-bottom:18px;">Sessões ativas</div>
+              <div style="display:flex; flex-direction:column;">
+                <sc-for list="{{ sessoes }}" as="s" hint-placeholder-count="3">
+                  <div style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #27272a;">
+                    <div style="width:38px; height:38px; border-radius:9px; background:#27272a; display:flex; align-items:center; justify-content:center; font-size:16px;">{{ s.icon }}</div>
+                    <div style="flex:1;">
+                      <div style="font-size:13.5px; font-weight:600; color:#f4f4f5;">{{ s.device }} <sc-if value="{{ s.current }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px; font-weight:700; color:#34d399; margin-left:6px;">● esta sessão</span></sc-if></div>
+                      <div style="font-size:12px; color:#71717a; margin-top:2px;">{{ s.meta }}</div>
+                    </div>
+                    <sc-if value="{{ s.notCurrent }}" hint-placeholder-val="{{ true }}"><button style="background:transparent; border:1px solid #3f3f46; color:#a1a1aa; font-size:12.5px; font-weight:600; font-family:inherit; border-radius:8px; padding:7px 13px; cursor:pointer;" style-hover="border-color:#ef4444; color:#f87171;">Encerrar</button></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    section: "plano",
+    nichos: { achadinhos: true, beleza: true, pet: false, renda: true, casa: false }
+  };
+
+  renderVals() {
+    const activeNav = "display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:9px; font-size:14px; font-weight:600; background:#27272a; color:#f59e0b;";
+    const idleNav = "display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:9px; font-size:14px; font-weight:500; background:transparent; color:#a1a1aa;";
+    const navItems = [
+      { label: "Dashboard", icon: "▚", style: idleNav, badge: null },
+      { label: "Ofertas Escaladas", icon: "🔥", style: idleNav, badge: null },
+      { label: "Monitorando", icon: "👁", style: idleNav, badge: null },
+      { label: "Rastreados & Alertas", icon: "🎯", style: idleNav, badge: "4" },
+      { label: "Ajustes", icon: "⚙", style: activeNav, badge: null }
+    ];
+
+    const sections = [
+      { id: "conta", label: "Conta" },
+      { id: "plano", label: "Plano & Uso" },
+      { id: "pref", label: "Preferências" },
+      { id: "sessoes", label: "Sessões" }
+    ];
+    const innerBase = "text-align:left; font-family:inherit; font-size:14px; border:none; border-radius:9px; padding:10px 14px; cursor:pointer; width:100%;";
+    const innerNav = sections.map(s => ({
+      label: s.label,
+      style: this.state.section === s.id
+        ? innerBase + " background:#27272a; color:#f59e0b; font-weight:600;"
+        : innerBase + " background:transparent; color:#a1a1aa; font-weight:500;",
+      select: () => this.setState({ section: s.id })
+    }));
+
+    const compareRows = [
+      { feature: "Ofertas monitoradas", pro: "50", elite: "∞" },
+      { feature: "Rastreios com alertas", pro: "15", elite: "50" },
+      { feature: "Histórico de escala", pro: "90 dias", elite: "Completo" },
+      { feature: "Export CSV", pro: "—", elite: "✓" }
+    ];
+
+    const nichoDef = [
+      { id: "achadinhos", label: "Achadinhos" },
+      { id: "beleza", label: "Beleza" },
+      { id: "pet", label: "Pet" },
+      { id: "renda", label: "Renda extra" },
+      { id: "casa", label: "Casa & Cozinha" }
+    ];
+    const chipBase = "display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; font-family:inherit; border-radius:999px; padding:8px 16px; cursor:pointer;";
+    const nichos = nichoDef.map(n => {
+      const on = this.state.nichos[n.id];
+      return {
+        label: n.label,
+        check: on ? "✓ " : "",
+        style: on
+          ? chipBase + " background:rgba(245,158,11,0.15); border:1px solid #f59e0b; color:#fcd34d;"
+          : chipBase + " background:#09090b; border:1px solid #27272a; color:#a1a1aa;",
+        toggle: () => this.setState(s => ({ nichos: { ...s.nichos, [n.id]: !s.nichos[n.id] } }))
+      };
+    });
+
+    const sessoes = [
+      { icon: "💻", device: "MacBook · Chrome", meta: "São Paulo, BR · agora", current: true, notCurrent: false },
+      { icon: "📱", device: "iPhone · App", meta: "São Paulo, BR · há 3h", current: false, notCurrent: true },
+      { icon: "🖥", device: "Windows · Edge", meta: "Rio de Janeiro, BR · há 2 dias", current: false, notCurrent: true }
+    ];
+
+    return {
+      navItems, innerNav, compareRows, nichos, sessoes,
+      isPlano: this.state.section === "plano",
+      isConta: this.state.section === "conta",
+      isPref: this.state.section === "pref",
+      isSessoes: this.state.section === "sessoes"
+    };
+  }
+}
+</script>
+</body>
+</html>
