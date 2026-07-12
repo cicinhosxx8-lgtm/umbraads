@@ -132,7 +132,7 @@ function PlanoUso({ plano, planoExpiraEm, uso }: AjustesProps) {
           </div>
           <div className="flex flex-wrap gap-2.5">
             <a
-              href="/#planos"
+              href={`/api/checkout/${plano === "pro" ? "elite" : "pro"}`}
               className="rounded-[9px] bg-brand px-[18px] py-2.5 text-[13.5px] font-bold text-app transition-colors hover:bg-brand-hover"
             >
               Fazer upgrade
@@ -207,10 +207,10 @@ function PlanoUso({ plano, planoExpiraEm, uso }: AjustesProps) {
           ))}
         </div>
         <a
-          href="/#planos"
+          href="/api/checkout/elite"
           className="mt-[18px] block w-full rounded-[10px] bg-brand py-3 text-center text-sm font-bold text-app transition-colors hover:bg-brand-hover"
         >
-          Subir pro Elite por R$197/mês
+          Subir pro Elite por R$147/mês
         </a>
       </div>
     </div>

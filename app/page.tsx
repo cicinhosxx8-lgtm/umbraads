@@ -36,10 +36,10 @@ const DEPOIMENTOS = [
   { metric: "3x ROAS", quote: "Modelei o criativo campeão de um gringo, adaptei pro BR e triplicei meu ROAS. Dados, não achismo.", initials: "TS", name: "Thiago Souza", role: "Dropshipper" },
 ];
 const PLANOS = [
-  { nome: "Básico", preco: "R$47", sub: "Pra sair do achismo.", destaque: false, feats: ["50 buscas por dia", "15 ofertas monitoradas", "Feed completo de ofertas escaladas"] },
-  { nome: "Pro", preco: "R$97", sub: "Pra quem já roda tráfego a sério.", destaque: true, feats: ["Buscas ilimitadas", "50 ofertas monitoradas", "15 rastreios com alertas", "Histórico de escala 90 dias"] },
-  { nome: "Elite", preco: "R$197", sub: "Pra agência e operação pesada.", destaque: false, feats: ["Tudo ilimitado", "50 rastreios com alertas", "Export CSV", "Histórico completo", "Acesso antecipado a novos recursos"] },
-];
+  { key: "basico", nome: "Básico", preco: "R$47", sub: "Pra sair do achismo.", destaque: false, feats: ["50 buscas por dia", "15 ofertas monitoradas", "Feed completo de ofertas escaladas"] },
+  { key: "pro", nome: "Pro", preco: "R$97", sub: "Pra quem já roda tráfego a sério.", destaque: true, feats: ["Buscas ilimitadas", "50 ofertas monitoradas", "15 rastreios com alertas", "Histórico de escala 90 dias"] },
+  { key: "elite", nome: "Elite", preco: "R$147", sub: "Pra agência e operação pesada.", destaque: false, feats: ["Tudo ilimitado", "50 rastreios com alertas", "Export CSV", "Histórico completo", "Acesso antecipado a novos recursos"] },
+] as const;
 
 const H2 =
   "text-[38px] font-extrabold leading-[1.1] tracking-[-0.025em] text-zinc-100 m-0";
@@ -275,7 +275,7 @@ export default function LandingPage() {
                 </div>
                 <div className="mb-6 text-[13px] text-zinc-500">{p.sub}</div>
                 <Link
-                  href="/login"
+                  href={`/api/checkout/${p.key}`}
                   className={
                     "mb-6 block rounded-[10px] py-3 text-center text-sm font-bold transition-colors " +
                     (p.destaque
