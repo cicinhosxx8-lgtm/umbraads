@@ -13,6 +13,7 @@ const PROTECTED_PREFIXES = [
   "/dashboard",
   "/ofertas",
   "/saas",
+  "/lowticket",
   "/monitorando",
   "/rastreados",
   "/ajustes",
