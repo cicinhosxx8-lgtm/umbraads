@@ -6,6 +6,7 @@ import type { Ad, PageSnapshot, Page } from "@/lib/types/database";
 import { dataBR, formatCriativo, gradientFor, paisFlag } from "@/lib/format";
 import { ScaleBandBadge } from "@/components/ads/ScaleBadge";
 import { StatusDot } from "@/components/ads/StatusDot";
+import { AdCreative } from "@/components/ads/AdCreative";
 import { EvolucaoChart } from "@/components/ads/EvolucaoChart";
 import { CopyButton } from "@/components/ads/CopyButton";
 import { VariacoesStrip } from "@/components/ads/VariacoesStrip";
@@ -114,34 +115,8 @@ export default async function DetalheAnuncioPage({
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[1.25fr_1fr]">
         {/* ======= COLUNA ESQUERDA ======= */}
         <div className="flex flex-col gap-5">
-          {/* player / criativo */}
-          <div
-            className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-line"
-            style={{ background: gradient }}
-          >
-            {ad.snapshot_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={ad.snapshot_url}
-                alt={ad.page_name ?? ""}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            ) : null}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="flex h-[72px] w-[72px] items-center justify-center rounded-full shadow-[0_10px_40px_rgba(245,158,11,0.4)]" style={{ background: "rgba(245,158,11,0.92)" }}>
-                <span className="ml-1 text-[26px] text-app">▶</span>
-              </div>
-            </div>
-            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-app/70 px-[11px] py-[5px] text-[11.5px] font-semibold backdrop-blur-[4px]">
-              <StatusDot ativo={ad.ativo} />
-              <span style={{ color: ad.ativo ? "#34d399" : "#f87171" }}>
-                {ad.ativo ? "Ativo" : "Morto"}
-              </span>
-            </div>
-            <div className="absolute bottom-3 right-3 rounded-md bg-app/70 px-2.5 py-1 text-[11.5px] font-semibold text-zinc-300 backdrop-blur-[4px]">
-              {formatCriativo(ad.tipo_criativo)}
-            </div>
-          </div>
+          {/* criativo (toca vídeo de verdade) */}
+          <AdCreative ad={ad} />
 
           {/* variações */}
           <div className="rounded-2xl border border-line bg-surface p-[18px]">

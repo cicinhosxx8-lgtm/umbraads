@@ -1,7 +1,14 @@
 import Link from "next/link";
 
 import type { Ad } from "@/lib/types/database";
-import { formatCriativo, gradientFor, paisFlag, tendencia, truncate } from "@/lib/format";
+import {
+  creativeKind,
+  formatCriativo,
+  gradientFor,
+  paisFlag,
+  tendencia,
+  truncate,
+} from "@/lib/format";
 import { ScaleBadge } from "@/components/ads/ScaleBadge";
 import { StatusDot } from "@/components/ads/StatusDot";
 import { Thumb } from "@/components/ads/Thumb";
@@ -17,15 +24,22 @@ export function AdCard({ ad }: { ad: Ad }) {
   const statusText = ad.ativo
     ? `Ativo há ${ad.dias_ativo ?? 0} dias`
     : "Morto";
+  const kind = creativeKind(ad);
 
   return (
     <div className="flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-line-hover">
       <Thumb
         gradient={gradientFor(ad.nicho, ad.ativo)}
         url={ad.snapshot_url}
+        kind={kind}
         alt={ad.page_name ?? ""}
         className="aspect-video"
       >
+        {kind === "video" ? (
+          <span className="pointer-events-none absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-app/60 backdrop-blur-[2px]">
+            <span className="ml-0.5 text-[15px] text-zinc-100">▶</span>
+          </span>
+        ) : null}
         <div className="absolute bottom-2.5 left-2.5 rounded-md bg-app/70 px-[9px] py-[3px] text-[11px] font-semibold text-zinc-300 backdrop-blur-[4px]">
           {formatCriativo(ad.tipo_criativo)}
         </div>

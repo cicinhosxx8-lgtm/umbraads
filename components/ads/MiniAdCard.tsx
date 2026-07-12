@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import type { Ad } from "@/lib/types/database";
-import { formatCriativo, gradientFor } from "@/lib/format";
+import { creativeKind, formatCriativo, gradientFor } from "@/lib/format";
 import { ScaleBadge } from "@/components/ads/ScaleBadge";
 import { StatusDot } from "@/components/ads/StatusDot";
 import { Thumb } from "@/components/ads/Thumb";
@@ -19,6 +19,7 @@ export function MiniAdCard({ ad }: { ad: Ad }) {
       <Thumb
         gradient={gradientFor(ad.nicho, ad.ativo)}
         url={ad.snapshot_url}
+        kind={creativeKind(ad)}
         alt={ad.page_name ?? ""}
         className="aspect-video"
       >

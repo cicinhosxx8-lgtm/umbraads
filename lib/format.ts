@@ -3,6 +3,20 @@
  * Sem dependências — puros e testáveis.
  */
 
+/** Que tipo de mídia o card deve renderizar a partir do anúncio. */
+export function creativeKind(ad: {
+  snapshot_url: string | null;
+  tipo_criativo: string | null;
+}): "video" | "image" | "none" {
+  if (!ad.snapshot_url) return "none";
+  return (ad.tipo_criativo ?? "").toUpperCase() === "VIDEO" ? "video" : "image";
+}
+
+/** URL pública do anúncio na Biblioteca de Anúncios da Meta (sempre funciona). */
+export function metaAdLibraryUrl(adArchiveId: string): string {
+  return `https://www.facebook.com/ads/library/?id=${adArchiveId}`;
+}
+
 /** Ícone + rótulo do tipo de criativo (espelha os labels do design). */
 export function formatCriativo(tipo: string | null | undefined): string {
   switch ((tipo ?? "").toUpperCase()) {
