@@ -126,7 +126,10 @@ export default async function DetalheAnuncioPage({
                 ({ad.variacoes_ativas})
               </span>
             </div>
-            <VariacoesStrip total={ad.variacoes_ativas} gradient={gradient} />
+            <VariacoesStrip
+              total={ad.variacoes_ativas}
+              adArchiveId={ad.ad_archive_id}
+            />
           </div>
 
           {/* evolução */}
