@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import type { Plano } from "@/lib/types/database";
 import { SAAS_CATEGORIAS } from "@/lib/saas-categorias";
-import { querySaas } from "@/lib/saas";
+import { querySaasLive } from "@/lib/ads-live";
 import { SaasFeed } from "@/components/saas/SaasFeed";
 import { cn } from "@/lib/utils";
 
@@ -36,7 +36,7 @@ export default async function SaasPage({
   const plano = ((profile as { plano: Plano } | null)?.plano ?? "free") as Plano;
   const isFree = plano === "free";
 
-  const { ads, nextCursor } = await querySaas(supabase, categoria);
+  const { ads, nextCursor } = await querySaasLive(categoria);
   const visibleAds = isFree ? ads.slice(0, FREE_VISIVEL) : ads;
   const cursor = isFree ? null : nextCursor;
 

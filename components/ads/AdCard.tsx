@@ -74,12 +74,12 @@ export function AdCard({ ad }: { ad: Ad }) {
 
         <div className="mt-auto flex items-center gap-2 border-t border-line pt-3">
           <Link
-            href={`/ofertas/${ad.id}`}
+            href={`/ofertas/${ad.id}?p=${ad.page_id}`}
             className="flex-1 rounded-lg border border-line-hover py-2 text-center text-[13px] font-semibold text-zinc-300 transition-colors hover:border-zinc-500 hover:text-zinc-100"
           >
             Ver detalhes
           </Link>
-          <AdActions adId={ad.id} pageId={ad.page_id} />
+          <AdActions adId={ad.id} pageId={ad.page_id} ad={ad} />
         </div>
       </div>
     </div>

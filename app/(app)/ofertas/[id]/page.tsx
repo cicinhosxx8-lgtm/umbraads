@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
-import type { Ad, PageSnapshot, Page } from "@/lib/types/database";
+import type { PageSnapshot, Page } from "@/lib/types/database";
+import { getLiveAd, maisDaPaginaLive } from "@/lib/ads-live";
 import { dataBR, formatCriativo, gradientFor, paisFlag } from "@/lib/format";
 import { ScaleBandBadge } from "@/components/ads/ScaleBadge";
 import { StatusDot } from "@/components/ads/StatusDot";
@@ -17,45 +18,22 @@ export const dynamic = "force-dynamic";
 
 export default async function DetalheAnuncioPage({
   params,
+  searchParams,
 }: {
   params: { id: string };
+  searchParams: { p?: string };
 }) {
   const supabase = await createClient();
 
-  const { data: adData } = await supabase
-    .from("ads")
-    .select("*")
-    .eq("id", params.id)
-    .maybeSingle();
-
-  const ad = adData as Ad | null;
+  // Anúncio ao vivo (id = ad_archive_id; page_id vem no ?p= do card).
+  const pageId = typeof searchParams?.p === "string" ? searchParams.p : undefined;
+  const ad = await getLiveAd(params.id, pageId);
   if (!ad) notFound();
 
-  // Dados relacionados: snapshots (gráfico), página (cabeçalho), mais anúncios,
-  // e o estado do usuário (já monitora esta oferta? já rastreia a página?).
-  const [
-    { data: snapsData },
-    { data: pageData },
-    { data: maisData },
-    { data: monitoradoData },
-    { data: rastreadoData },
-  ] = await Promise.all([
-    supabase
-      .from("page_snapshots")
-      .select("*")
-      .eq("page_id", ad.page_id)
-      .order("data", { ascending: true })
-      .returns<PageSnapshot[]>(),
-    supabase.from("pages").select("*").eq("page_id", ad.page_id).maybeSingle(),
-    supabase
-      .from("ads")
-      .select("*")
-      .eq("page_id", ad.page_id)
-      .neq("id", ad.id)
-      .order("scale_score", { ascending: false })
-      .limit(4)
-      .returns<Ad[]>(),
-    supabase.from("monitorados").select("id").eq("ad_id", ad.id).maybeSingle(),
+  // Mais anúncios da mesma página (do lote em cache) e se o usuário já
+  // rastreia esta página. Sem histórico ao vivo → gráfico fica vazio.
+  const [maisAds, { data: rastreadoData }] = await Promise.all([
+    maisDaPaginaLive(ad.page_id, ad.id, 4),
     supabase
       .from("rastreados")
       .select("id")
@@ -65,10 +43,9 @@ export default async function DetalheAnuncioPage({
       .maybeSingle(),
   ]);
 
-  const snapshots = snapsData ?? [];
-  const page = pageData as Page | null;
-  const maisAds = maisData ?? [];
-  const monitoradoId = (monitoradoData as { id: string } | null)?.id ?? null;
+  const snapshots: PageSnapshot[] = [];
+  const page = null as Page | null;
+  const monitoradoId: string | null = null;
   const rastreadoId = (rastreadoData as { id: string } | null)?.id ?? null;
 
   // Crescimento da página no período (primeiro vs último snapshot).
@@ -272,6 +249,7 @@ export default async function DetalheAnuncioPage({
           <DetailActions
             adId={ad.id}
             pageId={ad.page_id}
+            ad={ad}
             initialMonitoradoId={monitoradoId}
             initialRastreadoId={rastreadoId}
           />

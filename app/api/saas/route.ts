@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { getCtx } from "@/lib/api";
-import { querySaas } from "@/lib/saas";
+import { querySaasLive } from "@/lib/ads-live";
 
 const FREE_VISIVEL = 4;
 
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   const cursor = sp.get("cursor") ?? undefined;
 
   try {
-    const resultado = await querySaas(ctx.supabase, categoria, cursor);
+    const resultado = await querySaasLive(categoria, cursor);
     if (ctx.plano === "free") {
       return NextResponse.json({
         ads: resultado.ads.slice(0, FREE_VISIVEL),

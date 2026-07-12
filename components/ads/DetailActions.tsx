@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import type { Ad } from "@/lib/types/database";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,11 +13,13 @@ import { cn } from "@/lib/utils";
 export function DetailActions({
   adId,
   pageId,
+  ad,
   initialMonitoradoId = null,
   initialRastreadoId = null,
 }: {
   adId: string;
   pageId: string;
+  ad?: Ad; // anúncio ao vivo — enviado ao monitorar (grava no banco só então)
   initialMonitoradoId?: string | null;
   initialRastreadoId?: string | null;
 }) {
@@ -38,7 +41,7 @@ export function DetailActions({
         const res = await fetch("/api/monitorados", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ad_id: adId }),
+          body: JSON.stringify({ ad_id: adId, ad }),
         });
         const data = await res.json();
         if (!res.ok) {

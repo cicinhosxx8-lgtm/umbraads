@@ -3,7 +3,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { LIMITES, fmtLimite } from "@/lib/plano";
 import type { Plano } from "@/lib/types/database";
-import { parseFiltros, queryOfertas, filtrosToQuery } from "@/lib/ofertas";
+import { parseFiltros, filtrosToQuery } from "@/lib/ofertas";
+import { queryOfertasLive } from "@/lib/ads-live";
 import { FiltersBar } from "@/components/ads/FiltersBar";
 import { OfertasFeed } from "@/components/ads/OfertasFeed";
 
@@ -85,7 +86,7 @@ export default async function OfertasPage({
   const plano = ((profile as { plano: Plano } | null)?.plano ?? "free") as Plano;
   const isFree = plano === "free";
 
-  const { ads, nextCursor } = await queryOfertas(supabase, filtros);
+  const { ads, nextCursor } = await queryOfertasLive(filtros);
 
   // Free vê só os primeiros N reais; o resto vira card bloqueado no cliente.
   const visibleAds = isFree ? ads.slice(0, FREE_VISIVEL) : ads;

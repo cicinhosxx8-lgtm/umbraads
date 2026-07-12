@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { getCtx } from "@/lib/api";
-import { queryLowTicket } from "@/lib/lowticket";
+import { queryLowTicketLive } from "@/lib/ads-live";
 
 const FREE_VISIVEL = 4;
 
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   const cursor = sp.get("cursor") ?? undefined;
 
   try {
-    const resultado = await queryLowTicket(ctx.supabase, categoria, cursor);
+    const resultado = await queryLowTicketLive(categoria, cursor);
     if (ctx.plano === "free") {
       return NextResponse.json({
         ads: resultado.ads.slice(0, FREE_VISIVEL),

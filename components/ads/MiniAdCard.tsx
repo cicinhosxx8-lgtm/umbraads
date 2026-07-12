@@ -13,7 +13,7 @@ import { Thumb } from "@/components/ads/Thumb";
 export function MiniAdCard({ ad }: { ad: Ad }) {
   return (
     <Link
-      href={`/ofertas/${ad.id}`}
+      href={`/ofertas/${ad.id}?p=${ad.page_id}`}
       className="block overflow-hidden rounded-[14px] border border-line bg-surface transition-colors hover:border-line-hover"
     >
       <Thumb

@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { getCtx } from "@/lib/api";
-import { parseFiltros, queryOfertas } from "@/lib/ofertas";
+import { parseFiltros } from "@/lib/ofertas";
+import { queryOfertasLive } from "@/lib/ads-live";
 
 const FREE_VISIVEL = 4;
 
@@ -17,7 +18,7 @@ export async function GET(request: NextRequest) {
   const filtros = parseFiltros(request.nextUrl.searchParams);
 
   try {
-    const resultado = await queryOfertas(ctx.supabase, filtros);
+    const resultado = await queryOfertasLive(filtros);
     if (ctx.plano === "free") {
       return NextResponse.json({
         ads: resultado.ads.slice(0, FREE_VISIVEL),

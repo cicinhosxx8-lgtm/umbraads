@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
 import type { Ad, Monitorado, Alerta } from "@/lib/types/database";
+import { feedLote } from "@/lib/ads-live";
 import { timeAgo, gradientFor as gradiente } from "@/lib/format";
 import { TopAdCard as TopAdCardServer } from "@/components/dashboard/TopAdCard";
 
@@ -36,49 +37,36 @@ export default async function DashboardPage() {
     .toISOString()
     .slice(0, 10);
 
-  const [
-    escalando,
-    novos,
-    naoLidos,
-    monitorandoCount,
-    topRes,
-    alertasRes,
-    radarRes,
-  ] = await Promise.all([
-    supabase
-      .from("ads")
-      .select("*", { count: "exact", head: true })
-      .eq("ativo", true)
-      .gte("scale_score", 71),
-    supabase
-      .from("ads")
-      .select("*", { count: "exact", head: true })
-      .gte("data_inicio", seteDias),
-    supabase
-      .from("alertas")
-      .select("*", { count: "exact", head: true })
-      .eq("lido", false),
-    supabase.from("monitorados").select("*", { count: "exact", head: true }),
-    supabase
-      .from("ads")
-      .select("*")
-      .eq("ativo", true)
-      .order("scale_score", { ascending: false })
-      .limit(6)
-      .returns<Ad[]>(),
-    supabase
-      .from("alertas")
-      .select("*")
-      .order("criado_em", { ascending: false })
-      .limit(5)
-      .returns<Alerta[]>(),
-    supabase
-      .from("monitorados")
-      .select("*, ads(*)")
-      .order("criado_em", { ascending: false })
-      .limit(4)
-      .returns<MonitoradoComAd[]>(),
-  ]);
+  const [lote, naoLidos, monitorandoCount, alertasRes, radarRes] =
+    await Promise.all([
+      feedLote(), // anúncios ao vivo (cache 30 min) — top + contadores
+      supabase
+        .from("alertas")
+        .select("*", { count: "exact", head: true })
+        .eq("lido", false),
+      supabase.from("monitorados").select("*", { count: "exact", head: true }),
+      supabase
+        .from("alertas")
+        .select("*")
+        .order("criado_em", { ascending: false })
+        .limit(5)
+        .returns<Alerta[]>(),
+      supabase
+        .from("monitorados")
+        .select("*, ads(*)")
+        .order("criado_em", { ascending: false })
+        .limit(4)
+        .returns<MonitoradoComAd[]>(),
+    ]);
+
+  // Contadores derivados do lote ao vivo.
+  const escalando = {
+    count: lote.filter((a) => a.ativo && a.scale_score >= 71).length,
+  };
+  const novos = {
+    count: lote.filter((a) => (a.data_inicio ?? "") >= seteDias).length,
+  };
+  const topRes = { data: lote.slice(0, 6) };
 
   const stats = [
     {

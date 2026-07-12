@@ -1,8 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { getCtx, apiError } from "@/lib/api";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { upsertLiveAd } from "@/lib/providers/persist";
 import { LIMITES, PLANO_LABEL } from "@/lib/plano";
-import type { MonitoradoStatus } from "@/lib/types/database";
+import type { Ad, MonitoradoStatus } from "@/lib/types/database";
 
 const STATUS_VALIDOS: MonitoradoStatus[] = ["observando", "validada", "morta"];
 
@@ -28,9 +30,19 @@ export async function POST(request: NextRequest) {
 
   const body = (await request.json().catch(() => null)) as {
     ad_id?: string;
+    ad?: Ad;
   } | null;
-  const adId = body?.ad_id;
+  let adId = body?.ad_id;
   if (!adId) return apiError("ad_id é obrigatório.", 400);
+
+  // Feed ao vivo: o anúncio não está no banco. Se o card mandou o objeto do
+  // anúncio, grava-o (só agora, porque o usuário escolheu monitorar) e usa o
+  // uuid real da linha para a FK de monitorados.
+  if (body?.ad?.ad_archive_id) {
+    const realId = await upsertLiveAd(createAdminClient(), body.ad);
+    if (realId) adId = realId;
+    else return apiError("Não foi possível salvar o anúncio.", 500);
+  }
 
   // Já monitora? Devolve o registro existente (idempotente).
   const { data: existente } = await supabase

@@ -2,11 +2,46 @@ import "server-only";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-import type { Database } from "@/lib/types/database";
+import type { Ad, Database } from "@/lib/types/database";
 import type { NormalizedAd } from "@/lib/providers/types";
 import { computeScaleScore } from "@/lib/providers/scale-score";
 
 type Admin = SupabaseClient<Database>;
+
+/**
+ * Upsert de UM anúncio ao vivo (feed sem banco) para dar integridade à FK
+ * quando o usuário monitora a oferta. Insere por ad_archive_id (ignora o id
+ * sintético do card) e devolve o uuid real da linha em `ads`.
+ */
+export async function upsertLiveAd(admin: Admin, ad: Ad): Promise<string | null> {
+  if (!ad?.ad_archive_id || !ad?.page_id) return null;
+  const payload = {
+    ad_archive_id: ad.ad_archive_id,
+    page_id: ad.page_id,
+    page_name: ad.page_name,
+    tipo_criativo: ad.tipo_criativo,
+    copy_texto: ad.copy_texto,
+    cta: ad.cta,
+    link_destino: ad.link_destino,
+    snapshot_url: ad.snapshot_url,
+    pais: ad.pais,
+    nicho: ad.nicho,
+    idioma: ad.idioma,
+    ativo: ad.ativo,
+    data_inicio: ad.data_inicio,
+    dias_ativo: ad.dias_ativo,
+    variacoes_ativas: ad.variacoes_ativas,
+    scale_score: ad.scale_score,
+    ultima_verificacao: new Date().toISOString(),
+  };
+  await admin.from("ads").upsert(payload as never, { onConflict: "ad_archive_id" });
+  const { data } = await admin
+    .from("ads")
+    .select("id")
+    .eq("ad_archive_id", ad.ad_archive_id)
+    .maybeSingle();
+  return (data as { id: string } | null)?.id ?? null;
+}
 
 /**
  * Upsert dos anúncios normalizados (por ad_archive_id), recalculando o Scale

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 
+import type { Ad } from "@/lib/types/database";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,9 +13,11 @@ import { cn } from "@/lib/utils";
 export function AdActions({
   adId,
   pageId,
+  ad,
 }: {
   adId: string;
   pageId: string;
+  ad?: Ad; // anúncio ao vivo (não está no banco) — enviado ao monitorar
 }) {
   const [monitoradoId, setMonitoradoId] = useState<string | null>(null);
   const [rastreadoId, setRastreadoId] = useState<string | null>(null);
@@ -42,7 +45,7 @@ export function AdActions({
         const res = await fetch("/api/monitorados", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ad_id: adId }),
+          body: JSON.stringify({ ad_id: adId, ad }),
         });
         const data = await res.json();
         if (!res.ok) return mostra(data.error ?? "Não deu pra monitorar", true);

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import type { Plano } from "@/lib/types/database";
 import { LOWTICKET_CATEGORIAS } from "@/lib/lowticket-categorias";
-import { queryLowTicket } from "@/lib/lowticket";
+import { queryLowTicketLive } from "@/lib/ads-live";
 import { LowTicketFeed } from "@/components/lowticket/LowTicketFeed";
 import { cn } from "@/lib/utils";
 
@@ -36,7 +36,7 @@ export default async function LowTicketPage({
   const plano = ((profile as { plano: Plano } | null)?.plano ?? "free") as Plano;
   const isFree = plano === "free";
 
-  const { ads, nextCursor } = await queryLowTicket(supabase, categoria);
+  const { ads, nextCursor } = await queryLowTicketLive(categoria);
   const visibleAds = isFree ? ads.slice(0, FREE_VISIVEL) : ads;
   const cursor = isFree ? null : nextCursor;
 
