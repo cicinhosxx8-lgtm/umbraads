@@ -26,6 +26,16 @@ const LOTE_MAX = 60; // teto de anúncios por lote
 
 export const PAGE_SIZE = 12;
 
+// Índice em memória (por instância, quente) de todo anúncio que já passou por
+// algum feed — para a página de detalhe achar o anúncio pelo id sem depender de
+// qual feed (Ofertas/SaaS/Low Ticket) ele veio. Best-effort; se a instância for
+// fria, o detalhe cai no fallback ao vivo (getPageAds/getAd).
+const adIndex = new Map<string, Ad>();
+function indexAds(ads: Ad[]): void {
+  if (adIndex.size > 8000) adIndex.clear(); // teto simples anti-vazamento
+  for (const a of ads) adIndex.set(a.id, a);
+}
+
 type Combo = [country: string, query: string, nicho: string];
 
 // keywords por idioma (a API não classifica nicho — usamos a keyword)
@@ -257,6 +267,7 @@ export async function queryOfertasLive(
   f: OfertasFiltros,
 ): Promise<{ ads: Ad[]; nextCursor: string | null }> {
   const lote = await loteFeed();
+  indexAds(lote);
   return paginar(aplicarFiltros(lote, f), f.cursor || undefined);
 }
 
@@ -266,6 +277,7 @@ export async function querySaasLive(
   cursor?: string,
 ): Promise<{ ads: Ad[]; nextCursor: string | null }> {
   const lote = await loteSaas(key);
+  indexAds(lote);
   return paginar(lote, cursor);
 }
 
@@ -275,17 +287,21 @@ export async function queryLowTicketLive(
   cursor?: string,
 ): Promise<{ ads: Ad[]; nextCursor: string | null }> {
   const lote = await loteLowTicket(key);
+  indexAds(lote);
   return paginar(lote, cursor);
 }
 
 /** Lote completo do feed em cache (usado pelo dashboard p/ top + contadores). */
 export async function feedLote(): Promise<Ad[]> {
-  return loteFeed();
+  const lote = await loteFeed();
+  indexAds(lote);
+  return lote;
 }
 
 /** Top N do feed (usado pelo dashboard). */
 export async function topOfertasLive(n: number): Promise<Ad[]> {
   const lote = await loteFeed();
+  indexAds(lote);
   return lote.slice(0, n);
 }
 
@@ -295,22 +311,38 @@ export async function topOfertasLive(n: number): Promise<Ad[]> {
  * Cacheado por 30 min por (id,pageId).
  */
 export async function getLiveAd(id: string, pageId?: string): Promise<Ad | null> {
-  const lote = await loteFeed();
-  const noLote = lote.find((a) => a.id === id);
+  // 1) índice em memória (qualquer feed já visto nesta instância) — 0 chamadas.
+  const doIndice = adIndex.get(id);
+  if (doIndice) return doIndice;
+  // 2) lote principal em cache.
+  const noLote = (await loteFeed()).find((a) => a.id === id);
   if (noLote) return noLote;
   if (!pageId) return null;
 
+  // 3) instância fria: busca ao vivo (cacheada por id+pageId). Tenta a LISTA da
+  // página (endpoint de busca, mais confiável) e depois o endpoint de detalhe.
   return unstable_cache(
     async () => {
       const admin = createAdminClient();
       await seedApiKeys(admin);
       const provider = createFacebookProvider(admin);
+
+      try {
+        const { ads } = await provider.getPageAds(pageId);
+        const exato = ads.find((a) => a.ad_archive_id === id);
+        if (exato) return toAd(exato);
+      } catch {
+        /* segue pro detalhe */
+      }
+
       try {
         const n = await provider.getAd(id, pageId);
-        return n ? toAd({ ...n, ad_archive_id: id, page_id: pageId }) : null;
+        if (n) return toAd({ ...n, ad_archive_id: id, page_id: pageId });
       } catch {
-        return null;
+        /* sem sorte */
       }
+
+      return null;
     },
     ["ads-live", "detail", id, pageId],
     { revalidate: REVALIDATE, tags: ["ads-live"] },
@@ -331,7 +363,9 @@ export async function searchAoVivo(
   await seedApiKeys(admin);
   const provider = createFacebookProvider(admin);
   const { ads } = await provider.searchAds({ query, pais, ativo });
-  return ads.filter((a) => a.snapshot_url).map(toAd);
+  const mapped = ads.filter((a) => a.snapshot_url).map(toAd);
+  indexAds(mapped);
+  return mapped;
 }
 
 /** "Mais anúncios da mesma página" a partir do lote em cache (0 chamadas extra). */
