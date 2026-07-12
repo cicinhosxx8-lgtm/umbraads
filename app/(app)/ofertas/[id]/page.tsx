@@ -111,7 +111,7 @@ export default async function DetalheAnuncioPage({
   ];
 
   return (
-    <main className="w-full max-w-[1320px] px-8 pb-12 pt-7">
+    <main className="mx-auto w-full max-w-[1320px] px-8 pb-12 pt-7">
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[1.25fr_1fr]">
         {/* ======= COLUNA ESQUERDA ======= */}
         <div className="flex flex-col gap-5">

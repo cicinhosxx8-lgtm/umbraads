@@ -38,7 +38,7 @@ export default async function AjustesPage() {
   };
 
   return (
-    <main className="w-full max-w-[1080px] px-8 pb-12 pt-7">
+    <main className="mx-auto w-full max-w-[1080px] px-8 pb-12 pt-7">
       <div className="mb-6">
         <h1 className="m-0 text-[26px] font-extrabold tracking-[-0.02em] text-zinc-100">
           Ajustes

@@ -96,7 +96,7 @@ export default async function OfertasPage({
   const qs = filtrosToQuery(filtros);
 
   return (
-    <main className="w-full max-w-[1320px] px-8 pb-12 pt-7">
+    <main className="mx-auto w-full max-w-[1320px] px-8 pb-12 pt-7">
       <div className="mb-[22px]">
         <h1 className="m-0 text-[26px] font-extrabold tracking-[-0.02em] text-zinc-100">
           Ofertas Escaladas

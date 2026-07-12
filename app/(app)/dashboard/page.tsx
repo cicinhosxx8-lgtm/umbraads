@@ -112,7 +112,7 @@ export default async function DashboardPage() {
   const radar = radarRes.data ?? [];
 
   return (
-    <main className="w-full max-w-[1280px] px-8 pb-12 pt-8">
+    <main className="mx-auto w-full max-w-[1280px] px-8 pb-12 pt-8">
       <div className="mb-7">
         <h1 className="m-0 text-[28px] font-extrabold tracking-[-0.02em] text-zinc-100">
           Fala, {primeiroNome} 👋
