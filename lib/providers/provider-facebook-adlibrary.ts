@@ -128,15 +128,19 @@ class FacebookAdLibraryProvider implements AdProvider {
   }
 
   async searchAds(filtros: SearchFiltros): Promise<SearchResultado> {
+    const country = filtros.pais ?? "BR";
     const json = await this.get(ENDPOINTS.search, {
       query: filtros.query ?? "",
-      country: filtros.pais ?? "BR",
+      country,
       active_status: ACTIVE_STATUS[filtros.ativo ?? "active"],
       ...(filtros.cursor ? { cursor: filtros.cursor } : {}),
     });
+    // A API costuma não trazer o país no anúncio → o país da BUSCA é a fonte
+    // da verdade (o anúncio está sendo veiculado naquele país).
     const ads = extractAds(json)
       .map(normalize)
-      .filter((a): a is NormalizedAd => a !== null);
+      .filter((a): a is NormalizedAd => a !== null)
+      .map((a) => ({ ...a, pais: country }));
     return { ads, nextCursor: extractCursor(json) };
   }
 
