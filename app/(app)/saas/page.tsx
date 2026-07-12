@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
 import type { Plano } from "@/lib/types/database";
-import { SAAS_CATEGORIAS, SAAS_TOTAL_PALAVRAS } from "@/lib/saas-categorias";
+import { SAAS_CATEGORIAS } from "@/lib/saas-categorias";
 import { querySaas } from "@/lib/saas";
 import { SaasFeed } from "@/components/saas/SaasFeed";
 import { cn } from "@/lib/utils";
@@ -54,11 +54,6 @@ export default async function SaasPage({
 
       {/* categorias */}
       <div className="mb-6 rounded-[14px] border border-line bg-surface p-4">
-        <div className="mb-2.5 flex items-center justify-between">
-          <span className="text-[12px] font-bold uppercase tracking-wide text-zinc-500">
-            {SAAS_CATEGORIAS.length} categorias · {SAAS_TOTAL_PALAVRAS} palavras
-          </span>
-        </div>
         <div className="flex max-h-[132px] flex-wrap gap-2 overflow-y-auto">
           {SAAS_CATEGORIAS.map((c) => {
             const ativo = c.key === categoria;
