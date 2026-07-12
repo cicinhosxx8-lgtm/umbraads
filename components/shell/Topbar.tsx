@@ -43,7 +43,11 @@ export function Topbar({
       </div>
 
       <div className="flex items-center gap-[18px]">
-        <Link href="/rastreados" className="relative" aria-label="Alertas">
+        <Link
+          href="/rastreados?tab=alertas"
+          className="relative"
+          aria-label="Alertas"
+        >
           <span className="text-[19px]">🔔</span>
           {alertasNaoLidos > 0 ? (
             <span className="absolute -right-[6px] -top-1 rounded-full bg-brand px-[5px] py-px text-[10px] font-extrabold text-app tabular">

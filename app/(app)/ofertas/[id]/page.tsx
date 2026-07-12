@@ -30,33 +30,45 @@ export default async function DetalheAnuncioPage({
   const ad = adData as Ad | null;
   if (!ad) notFound();
 
-  // Dados relacionados: snapshots (gráfico), página (cabeçalho) e mais anúncios.
-  const [{ data: snapsData }, { data: pageData }, { data: maisData }] =
-    await Promise.all([
-      supabase
-        .from("page_snapshots")
-        .select("*")
-        .eq("page_id", ad.page_id)
-        .order("data", { ascending: true })
-        .returns<PageSnapshot[]>(),
-      supabase
-        .from("pages")
-        .select("*")
-        .eq("page_id", ad.page_id)
-        .maybeSingle(),
-      supabase
-        .from("ads")
-        .select("*")
-        .eq("page_id", ad.page_id)
-        .neq("id", ad.id)
-        .order("scale_score", { ascending: false })
-        .limit(4)
-        .returns<Ad[]>(),
-    ]);
+  // Dados relacionados: snapshots (gráfico), página (cabeçalho), mais anúncios,
+  // e o estado do usuário (já monitora esta oferta? já rastreia a página?).
+  const [
+    { data: snapsData },
+    { data: pageData },
+    { data: maisData },
+    { data: monitoradoData },
+    { data: rastreadoData },
+  ] = await Promise.all([
+    supabase
+      .from("page_snapshots")
+      .select("*")
+      .eq("page_id", ad.page_id)
+      .order("data", { ascending: true })
+      .returns<PageSnapshot[]>(),
+    supabase.from("pages").select("*").eq("page_id", ad.page_id).maybeSingle(),
+    supabase
+      .from("ads")
+      .select("*")
+      .eq("page_id", ad.page_id)
+      .neq("id", ad.id)
+      .order("scale_score", { ascending: false })
+      .limit(4)
+      .returns<Ad[]>(),
+    supabase.from("monitorados").select("id").eq("ad_id", ad.id).maybeSingle(),
+    supabase
+      .from("rastreados")
+      .select("id")
+      .eq("tipo", "pagina")
+      .eq("valor", ad.page_id)
+      .eq("ativo", true)
+      .maybeSingle(),
+  ]);
 
   const snapshots = snapsData ?? [];
   const page = pageData as Page | null;
   const maisAds = maisData ?? [];
+  const monitoradoId = (monitoradoData as { id: string } | null)?.id ?? null;
+  const rastreadoId = (rastreadoData as { id: string } | null)?.id ?? null;
 
   // Crescimento da página no período (primeiro vs último snapshot).
   const crescimento = (() => {
@@ -279,7 +291,12 @@ export default async function DetalheAnuncioPage({
           </div>
 
           {/* ações */}
-          <DetailActions adId={ad.id} pageId={ad.page_id} />
+          <DetailActions
+            adId={ad.id}
+            pageId={ad.page_id}
+            initialMonitoradoId={monitoradoId}
+            initialRastreadoId={rastreadoId}
+          />
         </div>
       </div>
 
