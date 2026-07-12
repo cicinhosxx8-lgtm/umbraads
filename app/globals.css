@@ -30,6 +30,17 @@
     }
   }
 
+  /* Ponto pulsante do badge no hero da landing. */
+  @keyframes umbraDot {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+
   /* Métricas/números sempre com largura tabular (evita "pulo" de dígitos). */
   .tabular {
     font-variant-numeric: tabular-nums;

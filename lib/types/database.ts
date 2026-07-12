@@ -11,6 +11,11 @@ export type RastreadoTipo = "pagina" | "keyword";
 export type AlertaTipo = "novo_anuncio" | "explosao_variacoes" | "oferta_morta";
 export type ApiKeyStatus = "ativa" | "cooldown" | "esgotada";
 
+export interface Preferencias {
+  pais_padrao?: string;
+  nichos?: string[];
+}
+
 type Timestamptz = string;
 type DateStr = string;
 
@@ -24,6 +29,7 @@ export interface Database {
           plano: Plano;
           plano_expira_em: Timestamptz | null;
           buscas_hoje: number;
+          preferencias: Preferencias;
           created_at: Timestamptz;
         };
         Insert: {
@@ -32,6 +38,7 @@ export interface Database {
           plano?: Plano;
           plano_expira_em?: Timestamptz | null;
           buscas_hoje?: number;
+          preferencias?: Preferencias;
           created_at?: Timestamptz;
         };
         Update: Partial<Database["public"]["Tables"]["profiles"]["Insert"]>;

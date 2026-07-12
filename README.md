@@ -83,18 +83,52 @@ psql "$SUPABASE_DB_URL" -f supabase/seed.sql
 npm run dev
 ```
 
-Abra <http://localhost:3000>. O placeholder da home confirma que o scaffold subiu.
-Verificação de tipos: `npm run typecheck`.
+Abra <http://localhost:3000> — a **landing** pública. Faça login em `/login`
+pra entrar no app. Verificação de tipos: `npm run typecheck`.
 
-## Roadmap por fases
+> As migrations agora vão de `0001` a `0004` (a última adiciona `preferencias`
+> ao profile). Aplique todas, na ordem, antes do `seed.sql`.
+
+## Operação (FASE 5 — motor)
+
+### Chave da RapidAPI
+O motor de busca lê as chaves da tabela `api_keys` (nunca de env no client).
+Insira sua chave (rotacionada) no SQL Editor:
+
+```sql
+insert into public.api_keys (provedor, chave, limite_mensal)
+values ('facebook-scraper3', '<SUA_CHAVE_RAPIDAPI>', 100000);
+```
+
+O `key-manager` escolhe a chave de menor uso, incrementa a cada chamada e
+coloca em cooldown (1h) quando toma 429.
+
+### Crons (Vercel)
+`vercel.json` já declara os dois:
+- `/api/cron/refresh` — 06:00 UTC (re-verifica ofertas, gera alertas, snapshots)
+- `/api/cron/reset-buscas` — 00:00 UTC (zera a cota diária)
+
+Defina `CRON_SECRET` nas env da Vercel — o cron valida
+`Authorization: Bearer <CRON_SECRET>`. Teste local:
+
+```bash
+curl -H "x-cron-secret: $CRON_SECRET" http://localhost:3000/api/cron/reset-buscas
+```
+
+### Webhook de pagamento
+Aponte a Kiwify/Cakto para `POST /api/webhooks/pagamento?token=<PAGAMENTO_WEBHOOK_TOKEN>`.
+Ajuste o mapa `PRODUTO_PLANO` em `app/api/webhooks/pagamento/route.ts` com os
+IDs reais dos seus produtos.
+
+## Roadmap por fases — todas concluídas ✅
 
 | Fase | Entrega |
 |------|---------|
 | **1 — Fundação** ✅ | Scaffold, Tailwind com tokens, clients Supabase, middleware, migrations + seed |
-| 2 — Shell + Auth | `/login` com Supabase Auth (email/senha + Google), sidebar/topbar, guard |
-| 3 — Telas core | `/ofertas` (feed + filtros), `/ofertas/[id]` (gráfico), `/dashboard` |
-| 4 — Retenção | `/monitorando`, `/rastreados` (tabs, alertas), botões Monitorar/Rastrear |
-| 5 — Motor | Providers + key-manager + busca com cache + crons + webhook + `/ajustes` + landing |
+| **2 — Shell + Auth** ✅ | `/login` com Supabase Auth (email/senha + Google), sidebar/topbar, guard |
+| **3 — Telas core** ✅ | `/ofertas` (feed + filtros + cursor), `/ofertas/[id]` (gráfico), `/dashboard` |
+| **4 — Retenção** ✅ | `/monitorando`, `/rastreados` (tabs, alertas), botões Monitorar/Rastrear |
+| **5 — Motor** ✅ | Providers + key-manager + busca com cache + crons + webhook + `/ajustes` + landing |
 
 ## Segurança (não negociável)
 
