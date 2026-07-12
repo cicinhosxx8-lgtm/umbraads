@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
+import { proxiedCreative } from "@/lib/format";
 
 /**
- * Área de thumbnail do criativo.
- *  - kind "image": mostra a imagem (snapshot_url).
- *  - kind "video": mostra o primeiro frame do vídeo (preload metadata) — leve
- *    o bastante pro grid; o play de verdade é na tela de detalhe.
+ * Área de thumbnail do criativo (serve via /api/creative — proxy estável).
+ *  - kind "image": mostra a imagem.
+ *  - kind "video": mostra o primeiro frame do vídeo (preload metadata).
  *  - kind "none": cai no gradiente por nicho.
  * `children` são os badges sobrepostos (tipo, score, status, play).
  */
@@ -23,23 +23,25 @@ export function Thumb({
   className?: string;
   children?: React.ReactNode;
 }) {
+  const src = proxiedCreative(url);
+
   return (
     <div
       className={cn("relative overflow-hidden", className)}
       style={{ background: gradient }}
     >
-      {url && kind === "image" ? (
+      {src && kind === "image" ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={url}
+          src={src}
           alt={alt ?? ""}
           className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"
         />
       ) : null}
-      {url && kind === "video" ? (
+      {src && kind === "video" ? (
         <video
-          src={url}
+          src={src}
           muted
           playsInline
           preload="metadata"

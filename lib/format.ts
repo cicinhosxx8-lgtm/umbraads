@@ -17,6 +17,18 @@ export function metaAdLibraryUrl(adArchiveId: string): string {
   return `https://www.facebook.com/ads/library/?id=${adArchiveId}`;
 }
 
+/**
+ * Serve o criativo pelo nosso proxy (Vercel busca na FB CDN). Resolve
+ * reachability instável de redes residenciais e cacheia. Só proxia URLs da
+ * FB CDN; qualquer outra coisa volta como está.
+ */
+export function proxiedCreative(url: string | null | undefined): string | null {
+  if (!url) return null;
+  return /fbcdn\.net|cdninstagram\.com/.test(url)
+    ? `/api/creative?u=${encodeURIComponent(url)}`
+    : url;
+}
+
 /** Ícone + rótulo do tipo de criativo (espelha os labels do design). */
 export function formatCriativo(tipo: string | null | undefined): string {
   switch ((tipo ?? "").toUpperCase()) {

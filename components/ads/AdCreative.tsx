@@ -4,6 +4,7 @@ import {
   formatCriativo,
   gradientFor,
   metaAdLibraryUrl,
+  proxiedCreative,
 } from "@/lib/format";
 import { StatusDot } from "@/components/ads/StatusDot";
 
@@ -16,24 +17,25 @@ import { StatusDot } from "@/components/ads/StatusDot";
 export function AdCreative({ ad }: { ad: Ad }) {
   const kind = creativeKind(ad);
   const metaUrl = metaAdLibraryUrl(ad.ad_archive_id);
+  const src = proxiedCreative(ad.snapshot_url);
 
   return (
     <div
       className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-line"
       style={{ background: gradientFor(ad.nicho, ad.ativo) }}
     >
-      {kind === "video" && ad.snapshot_url ? (
+      {kind === "video" && src ? (
         <video
-          src={ad.snapshot_url}
+          src={src}
           controls
           playsInline
           preload="metadata"
           className="absolute inset-0 h-full w-full bg-black object-contain"
         />
-      ) : kind === "image" && ad.snapshot_url ? (
+      ) : kind === "image" && src ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={ad.snapshot_url}
+          src={src}
           alt={ad.page_name ?? ""}
           className="absolute inset-0 h-full w-full bg-black object-contain"
         />
