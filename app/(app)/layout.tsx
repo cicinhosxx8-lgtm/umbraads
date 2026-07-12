@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
+import { supabaseConfigured } from "@/lib/supabase/env";
 import { LIMITES } from "@/lib/plano";
 import type { Plano } from "@/lib/types/database";
 import { Sidebar } from "@/components/shell/Sidebar";
@@ -29,10 +30,7 @@ export default async function AppLayout({
 }) {
   // Sem env do Supabase (setup ainda não feito) → manda pro /login, que
   // renderiza sem depender de sessão.
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
+  if (!supabaseConfigured()) {
     redirect("/login");
   }
 

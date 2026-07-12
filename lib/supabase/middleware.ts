@@ -3,6 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
 import type { Database } from "@/lib/types/database";
+import { supabaseConfigured } from "@/lib/supabase/env";
 
 /**
  * Rotas que exigem sessão. Sem login → redireciona para /login.
@@ -29,12 +30,16 @@ function isProtected(pathname: string): boolean {
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
-  // Antes de configurar o .env.local, não há como validar sessão — deixa
-  // passar (o app renderiza, /login funciona) em vez de estourar 500.
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
+  // Antes de configurar o .env.local não há como validar sessão. Rotas
+  // protegidas vão pro /login (impede o Server Component de tentar criar o
+  // client e estourar 500); as públicas renderizam normalmente.
+  if (!supabaseConfigured()) {
+    if (isProtected(request.nextUrl.pathname)) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.search = "";
+      return NextResponse.redirect(url);
+    }
     return supabaseResponse;
   }
 
