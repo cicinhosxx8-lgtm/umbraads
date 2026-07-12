@@ -11,6 +11,12 @@ import { UpgradeCard } from "@/components/shell/UpgradeCard";
 
 const STORAGE_KEY = "umbra-sidebar-collapsed";
 
+// Outros produtos Umbra (links externos, abrem em nova aba).
+const EXTERNOS = [
+  { label: "Umbra Copywriter", href: "https://umbracopywriter.com/#/", icon: "✍️" },
+  { label: "Umbra Bot", href: "https://www.umbrabot.com.br", icon: "🤖" },
+];
+
 /**
  * Sidebar fixa (~240px) — design: Dashboard.dc.html.
  * Recolhível: o botão fecha/abre; fechada mostra só os ícones/emojis (com
@@ -83,8 +89,32 @@ export function Sidebar({
         ))}
       </nav>
 
-      {/* rodapé: card de upgrade (só aberta) + botão de recolher */}
+      {/* rodapé: outros produtos + card de upgrade (só aberta) + recolher */}
       <div className={cn("mt-auto", collapsed ? "p-2.5" : "p-[14px]")}>
+        <div className="mb-2.5 flex flex-col gap-1.5">
+          {EXTERNOS.map((p) => (
+            <a
+              key={p.href}
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={collapsed ? p.label : undefined}
+              className={cn(
+                "flex items-center gap-2.5 rounded-[9px] border border-line bg-app text-[13px] font-semibold text-zinc-300 transition-colors hover:border-brand hover:text-brand",
+                collapsed ? "justify-center px-0 py-2" : "px-3 py-2",
+              )}
+            >
+              <span className="text-base leading-none">{p.icon}</span>
+              {!collapsed ? (
+                <>
+                  <span>{p.label}</span>
+                  <span className="ml-auto text-zinc-600">↗</span>
+                </>
+              ) : null}
+            </a>
+          ))}
+        </div>
+
         {!collapsed ? (
           <div className="mb-2.5">
             <UpgradeCard
