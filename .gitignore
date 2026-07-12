@@ -47,3 +47,6 @@ Thumbs.db
 # NÃO commitar (rotacione a chave no RapidAPI). Os scorecards .md ficam.
 RAPIDAPI-INFORMAÇOES/scripts/test-api.ts
 
+
+.vercel
+.env*
