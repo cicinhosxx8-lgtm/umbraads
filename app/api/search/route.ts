@@ -94,7 +94,11 @@ export async function POST(request: NextRequest) {
       .in("id", cacheRow.ad_ids)
       .order("scale_score", { ascending: false })
       .returns<Ad[]>();
-    return NextResponse.json({ ads: data ?? [], fonte: "cache" });
+    const rows = data ?? [];
+    return NextResponse.json({
+      ads: plano === "free" ? rows.slice(0, 4) : rows,
+      fonte: "cache",
+    });
   }
 
   // 3) provider --------------------------------------------------------------
@@ -136,9 +140,10 @@ export async function POST(request: NextRequest) {
     .in("id", ids.length ? ids : ["00000000-0000-0000-0000-000000000000"])
     .order("scale_score", { ascending: false })
     .returns<Ad[]>();
+  const rows = data ?? [];
 
   return NextResponse.json({
-    ads: data ?? [],
+    ads: plano === "free" ? rows.slice(0, 4) : rows,
     fonte: "provider",
     nextCursor: resultado.nextCursor,
   });

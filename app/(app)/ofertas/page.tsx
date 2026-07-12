@@ -115,6 +115,8 @@ export default async function OfertasPage({
         initialAds={visibleAds}
         initialCursor={cursor}
         filtersQS={qs}
+        query={filtros.q}
+        pais={filtros.pais}
         locked={isFree}
       />
     </main>
