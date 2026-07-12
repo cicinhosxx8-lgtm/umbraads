@@ -12,7 +12,7 @@ export interface SaasCategoria {
 export const SAAS_CATEGORIAS: SaasCategoria[] = [
   {
     "key": "education_learning",
-    "label": "Education & Learning",
+    "label": "Educação & Aprendizado",
     "busca": [
       "online course",
       "e-learning",
@@ -126,7 +126,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "weight_loss",
-    "label": "Weight Loss",
+    "label": "Emagrecimento",
     "busca": [
       "weight loss",
       "lose weight",
@@ -235,7 +235,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "health_fitness",
-    "label": "Health & Fitness",
+    "label": "Saúde & Fitness",
     "busca": [
       "fitness",
       "workout",
@@ -343,7 +343,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "language_learning",
-    "label": "Language Learning",
+    "label": "Idiomas",
     "busca": [
       "learn english",
       "language learning",
@@ -452,7 +452,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "meditation_mindfulness",
-    "label": "Meditation & Mindfulness",
+    "label": "Meditação & Mindfulness",
     "busca": [
       "meditation",
       "mindfulness",
@@ -555,7 +555,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "finance_budgeting",
-    "label": "Finance & Budgeting",
+    "label": "Finanças & Orçamento",
     "busca": [
       "budget app",
       "personal finance",
@@ -664,7 +664,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "investing_trading",
-    "label": "Investing & Trading",
+    "label": "Investimentos & Trading",
     "busca": [
       "investing",
       "stock trading",
@@ -772,7 +772,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "crypto_web3",
-    "label": "Crypto & Web3",
+    "label": "Cripto & Web3",
     "busca": [
       "crypto",
       "bitcoin",
@@ -869,7 +869,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "dating_relationships",
-    "label": "Dating & Relationships",
+    "label": "Namoro & Relacionamentos",
     "busca": [
       "dating app",
       "find love",
@@ -972,7 +972,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "productivity",
-    "label": "Productivity",
+    "label": "Produtividade",
     "busca": [
       "productivity",
       "to do list",
@@ -1075,7 +1075,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "project_management",
-    "label": "Project Management",
+    "label": "Gestão de Projetos",
     "busca": [
       "project management",
       "team collaboration",
@@ -1172,7 +1172,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "note_taking",
-    "label": "Note Taking",
+    "label": "Notas & Anotações",
     "busca": [
       "note taking",
       "notes app",
@@ -1268,7 +1268,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "ai_tools",
-    "label": "AI Tools",
+    "label": "Ferramentas de IA",
     "busca": [
       "ai tool",
       "artificial intelligence",
@@ -1365,7 +1365,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "photo_editing",
-    "label": "Photo Editing",
+    "label": "Edição de Fotos",
     "busca": [
       "photo editor",
       "edit photos",
@@ -1462,7 +1462,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "video_editing",
-    "label": "Video Editing",
+    "label": "Edição de Vídeo",
     "busca": [
       "video editor",
       "edit videos",
@@ -1565,7 +1565,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "design_graphics",
-    "label": "Design & Graphics",
+    "label": "Design & Gráficos",
     "busca": [
       "graphic design",
       "logo maker",
@@ -1668,7 +1668,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "music_audio",
-    "label": "Music & Audio",
+    "label": "Música & Áudio",
     "busca": [
       "music app",
       "make music",
@@ -1855,7 +1855,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "streaming_video",
-    "label": "Streaming & Video",
+    "label": "Streaming & Vídeo",
     "busca": [
       "streaming",
       "watch movies",
@@ -1946,7 +1946,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "gaming",
-    "label": "Gaming",
+    "label": "Games",
     "busca": [
       "mobile game",
       "game app",
@@ -2048,7 +2048,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "astrology_spirituality",
-    "label": "Astrology & Spirituality",
+    "label": "Astrologia & Espiritualidade",
     "busca": [
       "astrology",
       "horoscope",
@@ -2139,7 +2139,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "habit_tracking",
-    "label": "Habit Tracking",
+    "label": "Hábitos",
     "busca": [
       "habit tracker",
       "build habits",
@@ -2236,7 +2236,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "sleep",
-    "label": "Sleep",
+    "label": "Sono",
     "busca": [
       "sleep app",
       "sleep sounds",
@@ -2339,7 +2339,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "mental_health",
-    "label": "Mental Health",
+    "label": "Saúde Mental",
     "busca": [
       "mental health",
       "anxiety relief",
@@ -2442,7 +2442,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "therapy_counseling",
-    "label": "Therapy & Counseling",
+    "label": "Terapia & Aconselhamento",
     "busca": [
       "online therapy",
       "therapist",
@@ -2537,7 +2537,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "nutrition_diet",
-    "label": "Nutrition & Diet",
+    "label": "Nutrição & Dieta",
     "busca": [
       "nutrition app",
       "meal plan",
@@ -2640,7 +2640,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "recipes_cooking",
-    "label": "Recipes & Cooking",
+    "label": "Receitas & Culinária",
     "busca": [
       "recipe app",
       "cooking",
@@ -2743,7 +2743,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "intermittent_fasting",
-    "label": "Intermittent Fasting",
+    "label": "Jejum Intermitente",
     "busca": [
       "intermittent fasting",
       "fasting app",
@@ -2822,7 +2822,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "skincare_beauty",
-    "label": "Skincare & Beauty",
+    "label": "Skincare & Beleza",
     "busca": [
       "skincare",
       "skin care routine",
@@ -2919,7 +2919,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "parenting_kids",
-    "label": "Parenting & Kids",
+    "label": "Filhos & Infantil",
     "busca": [
       "parenting",
       "kids learning",
@@ -3022,7 +3022,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "pregnancy_baby",
-    "label": "Pregnancy & Baby",
+    "label": "Gravidez & Bebê",
     "busca": [
       "pregnancy app",
       "baby tracker",
@@ -3125,7 +3125,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "real_estate",
-    "label": "Real Estate",
+    "label": "Imóveis",
     "busca": [
       "real estate",
       "property search",
@@ -3216,7 +3216,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "job_search_career",
-    "label": "Job Search & Career",
+    "label": "Emprego & Carreira",
     "busca": [
       "job search",
       "find a job",
@@ -3319,7 +3319,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "resume_cv",
-    "label": "Resume & CV",
+    "label": "Currículo & CV",
     "busca": [
       "resume builder",
       "cv maker",
@@ -3410,7 +3410,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "freelance_gig",
-    "label": "Freelance & Gig",
+    "label": "Freelance & Renda Extra",
     "busca": [
       "freelance",
       "gig work",
@@ -3501,7 +3501,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "invoicing_accounting",
-    "label": "Invoicing & Accounting",
+    "label": "Faturamento & Contabilidade",
     "busca": [
       "invoicing",
       "accounting software",
@@ -3604,7 +3604,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "tax",
-    "label": "Tax",
+    "label": "Impostos",
     "busca": [
       "tax software",
       "file taxes",
@@ -3689,7 +3689,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "insurance",
-    "label": "Insurance",
+    "label": "Seguros",
     "busca": [
       "insurance",
       "car insurance",
@@ -3786,7 +3786,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "legal_tech",
-    "label": "Legal Tech",
+    "label": "Jurídico",
     "busca": [
       "legal tech",
       "online lawyer",
@@ -3877,7 +3877,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "crm_sales",
-    "label": "CRM & Sales",
+    "label": "CRM & Vendas",
     "busca": [
       "crm",
       "sales software",
@@ -3974,7 +3974,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "email_marketing",
-    "label": "Email Marketing",
+    "label": "E-mail Marketing",
     "busca": [
       "email marketing",
       "email automation",
@@ -4053,7 +4053,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "social_media_tools",
-    "label": "Social Media Tools",
+    "label": "Redes Sociais",
     "busca": [
       "social media scheduler",
       "grow instagram",
@@ -4150,7 +4150,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "ecommerce_tools",
-    "label": "E-commerce Tools",
+    "label": "E-commerce",
     "busca": [
       "ecommerce",
       "online store",
@@ -4241,7 +4241,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "website_builder",
-    "label": "Website Builder",
+    "label": "Criação de Sites",
     "busca": [
       "website builder",
       "create a website",
@@ -4417,7 +4417,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "developer_tools",
-    "label": "Developer Tools",
+    "label": "Ferramentas Dev",
     "busca": [
       "developer tool",
       "api",
@@ -4508,7 +4508,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "cybersecurity_vpn",
-    "label": "Cybersecurity & VPN",
+    "label": "Segurança & VPN",
     "busca": [
       "vpn",
       "cybersecurity",
@@ -4599,7 +4599,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "cloud_storage",
-    "label": "Cloud Storage",
+    "label": "Armazenamento em Nuvem",
     "busca": [
       "cloud storage",
       "backup files",
@@ -4690,7 +4690,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "hr_recruiting",
-    "label": "HR & Recruiting",
+    "label": "RH & Recrutamento",
     "busca": [
       "hr software",
       "recruiting",
@@ -4787,7 +4787,7 @@ export const SAAS_CATEGORIAS: SaasCategoria[] = [
   },
   {
     "key": "customer_support",
-    "label": "Customer Support",
+    "label": "Atendimento ao Cliente",
     "busca": [
       "customer support",
       "help desk",
