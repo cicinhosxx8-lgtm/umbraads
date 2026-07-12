@@ -6,6 +6,7 @@ import type { Ad, AlertaTipo } from "@/lib/types/database";
 import { createFacebookProvider } from "@/lib/providers/provider-facebook-adlibrary";
 import { upsertAds, writePageSnapshot } from "@/lib/providers/persist";
 import { computeScaleScore } from "@/lib/providers/scale-score";
+import { runDiscovery } from "@/lib/providers/discover";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -166,6 +167,14 @@ export async function GET(request: NextRequest) {
     rotacionados = await rotacionar7d(admin);
   }
 
+  // ── descoberta automática (BR + internacionais) — enche o feed sozinho ────
+  let descoberta = null;
+  try {
+    descoberta = await runDiscovery(admin);
+  } catch {
+    // descoberta é best-effort; não derruba o refresh
+  }
+
   return NextResponse.json({
     ok: true,
     provider_ok: provOk,
@@ -173,6 +182,7 @@ export async function GET(request: NextRequest) {
     status_atualizados: statusAtualizados,
     alertas: alertasInseridos,
     rotacao_7d: rotacionados,
+    descoberta,
   });
 }
 

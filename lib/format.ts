@@ -41,6 +41,10 @@ export function paisFlag(pais: string | null | undefined): string {
     PT: "🇵🇹 PT",
     US: "🇺🇸 US",
     ES: "🇪🇸 ES",
+    GB: "🇬🇧 GB",
+    MX: "🇲🇽 MX",
+    DE: "🇩🇪 DE",
+    FR: "🇫🇷 FR",
   };
   return map[(pais ?? "").toUpperCase()] ?? (pais ?? "—");
 }

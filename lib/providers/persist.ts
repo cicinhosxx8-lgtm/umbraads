@@ -23,11 +23,20 @@ export async function upsertAds(
 
   const { data: existentes } = await admin
     .from("ads")
-    .select("ad_archive_id, variacoes_7d_atras")
+    .select("ad_archive_id, variacoes_7d_atras, nicho")
     .in("ad_archive_id", archiveIds)
-    .returns<{ ad_archive_id: string; variacoes_7d_atras: number | null }[]>();
+    .returns<
+      {
+        ad_archive_id: string;
+        variacoes_7d_atras: number | null;
+        nicho: string | null;
+      }[]
+    >();
   const mapa = new Map(
-    (existentes ?? []).map((e) => [e.ad_archive_id, e.variacoes_7d_atras]),
+    (existentes ?? []).map((e) => [
+      e.ad_archive_id,
+      { v7: e.variacoes_7d_atras, nicho: e.nicho },
+    ]),
   );
 
   const pages = dedupePages(ads);
@@ -45,6 +54,8 @@ export async function upsertAds(
     link_destino: a.link_destino,
     snapshot_url: a.snapshot_url,
     pais: a.pais,
+    // preserva o nicho existente quando o provider não classifica (null)
+    nicho: a.nicho ?? mapa.get(a.ad_archive_id)?.nicho ?? null,
     idioma: a.idioma,
     ativo: a.ativo,
     data_inicio: a.data_inicio,
@@ -52,7 +63,7 @@ export async function upsertAds(
     variacoes_ativas: a.variacoes_ativas,
     scale_score: computeScaleScore({
       variacoesAtivas: a.variacoes_ativas,
-      variacoes7dAtras: mapa.get(a.ad_archive_id) ?? null,
+      variacoes7dAtras: mapa.get(a.ad_archive_id)?.v7 ?? null,
       diasAtivo: a.dias_ativo,
     }),
     ultima_verificacao: new Date().toISOString(),

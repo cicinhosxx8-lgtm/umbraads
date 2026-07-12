@@ -17,8 +17,11 @@ const NICHOS = [
 const PAISES = [
   ["", "Todos os países"],
   ["BR", "Brasil"],
-  ["PT", "Portugal"],
   ["US", "EUA"],
+  ["GB", "Reino Unido"],
+  ["ES", "Espanha"],
+  ["MX", "México"],
+  ["PT", "Portugal"],
 ] as const;
 
 const FORMATOS = [
