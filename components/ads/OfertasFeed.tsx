@@ -68,7 +68,7 @@ export function OfertasFeed({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-4">
         {ads.map((ad) => (
           <AdCard key={ad.id} ad={ad} />
         ))}
