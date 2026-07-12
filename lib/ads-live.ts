@@ -21,8 +21,8 @@ import type { OfertasFiltros } from "@/lib/ofertas";
 // ════════════════════════════════════════════════════════════════════════════
 
 const REVALIDATE = 1800; // 30 min
-const BUSCAS_POR_LOTE = 4; // nº de buscas (keyword×país) por atualização do lote
-const LOTE_MAX = 60; // teto de anúncios por lote
+const BUSCAS_POR_LOTE = 8; // nº de buscas (keyword×país) por atualização do lote
+const LOTE_MAX = 120; // teto de anúncios por lote
 
 export const PAGE_SIZE = 12;
 
@@ -171,7 +171,7 @@ function loteSaas(key: string) {
     async () => {
       const cat = saasCategoriaByKey(key);
       if (!cat) return [] as Ad[];
-      const termos = amostra(cat.busca, 2);
+      const termos = amostra(cat.busca, 4);
       const combos: Combo[] = termos.flatMap((t) => [
         ["US", t, "saas"] as Combo,
         ["BR", t, "saas"] as Combo,
@@ -191,8 +191,8 @@ function loteLowTicket(key: string) {
       if (!cat) return [] as Ad[];
       const combos: Combo[] = [];
       for (const [pais, termos] of Object.entries(cat.buscaPorPais)) {
-        const t = amostra(termos, 1)[0];
-        if (t) combos.push([pais, t, "lowticket"]);
+        // vários termos por país — categorias só-BR não podem ficar com 1 busca
+        for (const t of amostra(termos, 4)) combos.push([pais, t, "lowticket"]);
       }
       return fetchLote(amostra(combos, BUSCAS_POR_LOTE));
     },
