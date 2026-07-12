@@ -12,6 +12,7 @@ import { supabaseConfigured } from "@/lib/supabase/env";
 const PROTECTED_PREFIXES = [
   "/dashboard",
   "/ofertas",
+  "/saas",
   "/monitorando",
   "/rastreados",
   "/ajustes",

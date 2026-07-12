@@ -16,6 +16,7 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: "▚", match: ["/dashboard"] },
   { label: "Ofertas Escaladas", href: "/ofertas", icon: "🔥", match: ["/ofertas"] },
+  { label: "Micro-SaaS / SaaS", href: "/saas", icon: "🧩", match: ["/saas"] },
   { label: "Monitorando", href: "/monitorando", icon: "👁", match: ["/monitorando"] },
   { label: "Rastreados & Alertas", href: "/rastreados", icon: "🎯", match: ["/rastreados"] },
   { label: "Ajustes", href: "/ajustes", icon: "⚙", match: ["/ajustes"] },
