@@ -66,7 +66,9 @@ export function FiltersBar() {
   useEffect(() => setDiasLive(dias), [dias]);
 
   function update(patch: Record<string, string>) {
-    const p = new URLSearchParams(sp.toString());
+    // Lê a URL atual (não o snapshot do render) — evita perder um filtro
+    // trocado enquanto a busca com debounce estava pendente.
+    const p = new URLSearchParams(window.location.search);
     for (const [k, v] of Object.entries(patch)) {
       if (v) p.set(k, v);
       else p.delete(k);

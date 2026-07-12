@@ -22,11 +22,12 @@ export interface OfertasFiltros {
   cursor: string;
 }
 
-// Formato do filtro (querystring) → valor de tipo_criativo no banco.
-const FORMATO_DB: Record<string, string> = {
-  video: "VIDEO",
-  imagem: "IMAGE",
-  carrossel: "DCO",
+// Formato do filtro (querystring) → valores de tipo_criativo no banco.
+// A Meta usa vários rótulos; agrupamos por família pra não perder anúncios.
+const FORMATO_DB: Record<string, string[]> = {
+  video: ["VIDEO"],
+  imagem: ["IMAGE", "MULTI_IMAGES"],
+  carrossel: ["DCO", "CAROUSEL", "DPA"],
 };
 
 interface SortCfg {
@@ -146,8 +147,8 @@ export async function queryOfertas(
   if (f.nicho) query = query.eq("nicho", f.nicho);
   if (f.pais) query = query.eq("pais", f.pais.toUpperCase());
   const formatoDb = f.formato ? FORMATO_DB[f.formato] : undefined;
-  if (formatoDb) {
-    query = query.eq("tipo_criativo", formatoDb);
+  if (formatoDb && formatoDb.length) {
+    query = query.in("tipo_criativo", formatoDb);
   }
   if (f.status === "ativo") query = query.eq("ativo", true);
   else if (f.status === "morto") query = query.eq("ativo", false);
