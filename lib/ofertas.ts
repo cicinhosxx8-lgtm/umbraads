@@ -133,6 +133,11 @@ export async function queryOfertas(
 
   let query = supabase.from("ads").select("*");
 
+  // Só entram no feed anúncios COM criativo — num app de espionagem visual, um
+  // anúncio sem imagem/vídeo não serve pra modelar. (A busca da Ad Library às
+  // vezes devolve o criativo vazio; esses ficam de fora do feed.)
+  query = query.not("snapshot_url", "is", null);
+
   // filtros
   if (f.q) {
     // Remove caracteres que quebrariam a sintaxe de filtro do PostgREST.

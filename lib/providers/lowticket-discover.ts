@@ -7,6 +7,7 @@ import type { NormalizedAd } from "@/lib/providers/types";
 import { createFacebookProvider } from "@/lib/providers/provider-facebook-adlibrary";
 import { upsertAds } from "@/lib/providers/persist";
 import { KeysEsgotadasError } from "@/lib/providers/key-manager";
+import { seedApiKeys } from "@/lib/providers/api-config";
 import { LOWTICKET_CATEGORIAS } from "@/lib/lowticket-categorias";
 
 type Admin = SupabaseClient<Database>;
@@ -39,6 +40,7 @@ export async function runLowTicketDiscovery(
     termosPorPais = 1,
     paises = ["US", "BR", "DE", "JP"],
   } = opts;
+  await seedApiKeys(admin); // garante o pool de chaves (env → api_keys)
   const provider = createFacebookProvider(admin);
   const cats = LOWTICKET_CATEGORIAS.slice(offset, offset + count);
 

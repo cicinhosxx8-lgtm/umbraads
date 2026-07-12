@@ -7,6 +7,7 @@ import type { NormalizedAd } from "@/lib/providers/types";
 import { createFacebookProvider } from "@/lib/providers/provider-facebook-adlibrary";
 import { upsertAds } from "@/lib/providers/persist";
 import { KeysEsgotadasError } from "@/lib/providers/key-manager";
+import { seedApiKeys } from "@/lib/providers/api-config";
 import { SAAS_CATEGORIAS } from "@/lib/saas-categorias";
 
 type Admin = SupabaseClient<Database>;
@@ -34,6 +35,7 @@ export async function runSaasDiscovery(
   } = {},
 ): Promise<SaasDiscoverResultado> {
   const { offset = 0, count = 12, termosPorCat = 1, paises = ["US"] } = opts;
+  await seedApiKeys(admin); // garante o pool de chaves (env → api_keys)
   const provider = createFacebookProvider(admin);
   const cats = SAAS_CATEGORIAS.slice(offset, offset + count);
 

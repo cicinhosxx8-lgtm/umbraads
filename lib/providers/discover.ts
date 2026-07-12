@@ -7,6 +7,7 @@ import type { NormalizedAd } from "@/lib/providers/types";
 import { createFacebookProvider } from "@/lib/providers/provider-facebook-adlibrary";
 import { upsertAds } from "@/lib/providers/persist";
 import { KeysEsgotadasError } from "@/lib/providers/key-manager";
+import { seedApiKeys } from "@/lib/providers/api-config";
 
 type Admin = SupabaseClient<Database>;
 type QN = [query: string, nicho: string];
@@ -69,6 +70,7 @@ export interface DiscoverResultado {
  * diário de refresh e pela rota /api/cron/discover.
  */
 export async function runDiscovery(admin: Admin): Promise<DiscoverResultado> {
+  await seedApiKeys(admin); // garante o pool de chaves (env → api_keys)
   const provider = createFacebookProvider(admin);
   const coletados: NormalizedAd[] = [];
   const porPais: Record<string, number> = {};

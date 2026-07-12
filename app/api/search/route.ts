@@ -8,6 +8,7 @@ import { LIMITES, PLANO_LABEL } from "@/lib/plano";
 import type { Ad } from "@/lib/types/database";
 import { createFacebookProvider } from "@/lib/providers/provider-facebook-adlibrary";
 import { KeysEsgotadasError } from "@/lib/providers/key-manager";
+import { seedApiKeys } from "@/lib/providers/api-config";
 import { upsertAds } from "@/lib/providers/persist";
 
 export const dynamic = "force-dynamic";
@@ -102,6 +103,7 @@ export async function POST(request: NextRequest) {
   }
 
   // 3) provider --------------------------------------------------------------
+  await seedApiKeys(admin); // garante o pool de chaves (env → api_keys)
   const provider = createFacebookProvider(admin);
   let resultado;
   try {
